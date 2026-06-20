@@ -1,0 +1,200 @@
+asyncapi: '2.6.0'
+id: 'urn:com:predibase:inference:sse'
+info:
+  title: Predibase Inference Streaming (HTTP + SSE)
+  version: '1.0.0'
+  description: |
+    AsyncAPI 2.6 description of Predibase's **inference streaming** surface.
+
+    Predibase does not publish a WebSocket API. The only asynchronous /
+    event-style transport documented at
+    https://docs.predibase.com/user-guide/inference/rest_api and
+    https://docs.predibase.com/user-guide/inference/migrate-openai is **HTTP
+    Server-Sent Events (SSE)**, delivered two ways:
+
+    1. Over the OpenAI-compatible endpoint `POST /v1/chat/completions` when the
+       request body sets `stream: true`.
+    2. Over the native `POST /generate_stream` endpoint, which always streams
+       generated tokens.
+
+    SSE is a one-way, server-to-client HTTP streaming channel; it is **not**
+    WebSocket. The request bodies are modeled in the companion OpenAPI document
+    at `openapi/predibase-openapi.yml`.
+  contact:
+    name: API Evangelist
+    email: kin@apievangelist.com
+    url: https://apievangelist.com
+  license:
+    name: API documentation - Predibase Terms of Service
+    url: https://predibase.com/terms-of-service
+  x-transport-notes:
+    transport: HTTP Server-Sent Events (SSE)
+    protocol: https
+    direction: server-to-client (one-way)
+    mediaType: text/event-stream
+    triggeredBy: 'POST .../v1/chat/completions with { "stream": true }, or POST .../generate_stream'
+    notWebSocket: true
+    source: https://docs.predibase.com/user-guide/inference/rest_api
+defaultContentType: text/event-stream
+servers:
+  serving:
+    url: serving.app.predibase.com/{tenant}/deployments/v2/llms/{model}
+    protocol: https
+    description: |
+      Predibase inference (serving) base. Streaming is delivered as HTTP
+      Server-Sent Events over this base, either via the OpenAI-compatible
+      `/v1/chat/completions` endpoint with `stream: true` or via the native
+      `/generate_stream` endpoint. AsyncAPI 2.6 has no dedicated SSE protocol
+      identifier; `https` is used and the SSE transport is documented in
+      `info.x-transport-notes` and on each channel.
+    security:
+      - bearerAuth: []
+    variables:
+      tenant:
+        default: TENANT_ID
+        description: Predibase tenant ID.
+      model:
+        default: DEPLOYMENT_NAME
+        description: Deployment name.
+channels:
+  /v1/chat/completions:
+    description: |
+      OpenAI-compatible chat completion SSE stream. The client opens this
+      channel by issuing `POST /v1/chat/completions` with a JSON body containing
+      `stream: true`. The server responds with `Content-Type: text/event-stream`
+      and emits `data:` lines, each carrying one JSON `chat.completion.chunk`,
+      followed by a final `data: [DONE]` line.
+    bindings:
+      http:
+        type: request
+        method: POST
+        bindingVersion: '0.3.0'
+      x-sse:
+        mediaType: text/event-stream
+        eventField: 'data'
+        terminator: '[DONE]'
+    subscribe:
+      operationId: streamChatCompletionChunks
+      summary: Subscribe to streamed chat completion chunks (SSE).
+      bindings:
+        http:
+          type: response
+          bindingVersion: '0.3.0'
+      message:
+        oneOf:
+          - $ref: '#/components/messages/ChatCompletionChunk'
+          - $ref: '#/components/messages/StreamDone'
+  /generate_stream:
+    description: |
+      Native token stream. The client opens this channel by issuing
+      `POST /generate_stream` with a JSON body containing `inputs` and optional
+      `parameters` (including `adapter_id` and `adapter_source`). The server
+      emits one SSE `data:` event per generated token.
+    bindings:
+      http:
+        type: request
+        method: POST
+        bindingVersion: '0.3.0'
+      x-sse:
+        mediaType: text/event-stream
+        eventField: 'data'
+    subscribe:
+      operationId: streamGeneratedTokens
+      summary: Subscribe to streamed generated tokens (SSE).
+      bindings:
+        http:
+          type: response
+          bindingVersion: '0.3.0'
+      message:
+        $ref: '#/components/messages/TokenChunk'
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: 'Predibase API token'
+      description: |
+        Set `Authorization: Bearer <PREDIBASE_API_TOKEN>` on the request that
+        opens the SSE stream.
+  messages:
+    ChatCompletionChunk:
+      name: ChatCompletionChunk
+      title: Streamed chat completion chunk
+      contentType: application/json
+      summary: A single SSE `data:` event carrying one JSON `chat.completion.chunk` object.
+      payload:
+        $ref: '#/components/schemas/ChatCompletionChunk'
+    TokenChunk:
+      name: TokenChunk
+      title: Streamed generated-token chunk
+      contentType: application/json
+      summary: A single SSE `data:` event carrying one generated token and its metadata.
+      payload:
+        $ref: '#/components/schemas/TokenChunk'
+    StreamDone:
+      name: StreamDone
+      title: Stream terminator
+      contentType: text/plain
+      summary: 'The literal SSE event `data: [DONE]` marking end of the chat completion stream.'
+      payload:
+        $ref: '#/components/schemas/StreamDoneSentinel'
+  schemas:
+    StreamDoneSentinel:
+      type: string
+      enum:
+        - '[DONE]'
+      description: 'End-of-stream sentinel. The full SSE line is `data: [DONE]`.'
+    ChatCompletionChunk:
+      type: object
+      required:
+        - id
+        - object
+        - choices
+      properties:
+        id:
+          type: string
+        object:
+          type: string
+          enum:
+            - chat.completion.chunk
+        created:
+          type: integer
+        model:
+          type: string
+        choices:
+          type: array
+          items:
+            type: object
+            properties:
+              index:
+                type: integer
+              delta:
+                type: object
+                properties:
+                  role:
+                    type: string
+                  content:
+                    type: string
+                    nullable: true
+              finish_reason:
+                type: string
+                nullable: true
+    TokenChunk:
+      type: object
+      properties:
+        token:
+          type: object
+          properties:
+            id:
+              type: integer
+            text:
+              type: string
+            logprob:
+              type: number
+        generated_text:
+          type: string
+          nullable: true
+          description: Present only on the final event; the full generated string.
+        details:
+          type: object
+          nullable: true

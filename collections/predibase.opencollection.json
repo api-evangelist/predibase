@@ -1,0 +1,360 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Predibase API",
+    "version": "2.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Inference",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "OpenAI-compatible chat completion.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://serving.app.predibase.com/{{tenant}}/deployments/v2/llms/{{model}}/v1/chat/completions",
+            "body": {
+              "type": "json",
+              "data": "{\n  \"model\": \"\",\n  \"messages\": [{\"role\": \"user\", \"content\": \"Hello\"}],\n  \"max_tokens\": 100,\n  \"stream\": false\n}"
+            }
+          },
+          "docs": "Creates an OpenAI-compatible chat completion against the named deployment. Set model to an adapter ID to serve a fine-tuned LoRA. Set stream to true for SSE."
+        },
+        {
+          "info": {
+            "name": "OpenAI-compatible text completion.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://serving.app.predibase.com/{{tenant}}/deployments/v2/llms/{{model}}/v1/completions",
+            "body": {
+              "type": "json",
+              "data": "{\n  \"model\": \"\",\n  \"prompt\": \"How many helicopters can a human eat in one sitting?\",\n  \"max_tokens\": 100\n}"
+            }
+          },
+          "docs": "Creates an OpenAI-compatible text completion against the named deployment."
+        },
+        {
+          "info": {
+            "name": "Native text generation.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://serving.app.predibase.com/{{tenant}}/deployments/v2/llms/{{model}}/generate",
+            "body": {
+              "type": "json",
+              "data": "{\n  \"inputs\": \"What is your name?\",\n  \"parameters\": {\n    \"max_new_tokens\": 100,\n    \"adapter_id\": \"my-repo/1\",\n    \"adapter_source\": \"pbase\"\n  }\n}"
+            }
+          },
+          "docs": "Generates text from a deployed model, optionally applying a LoRA adapter via adapter_id and adapter_source (pbase, hub, or s3)."
+        },
+        {
+          "info": {
+            "name": "Native streaming text generation.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://serving.app.predibase.com/{{tenant}}/deployments/v2/llms/{{model}}/generate_stream",
+            "body": {
+              "type": "json",
+              "data": "{\n  \"inputs\": \"What is your name?\",\n  \"parameters\": {\n    \"max_new_tokens\": 100\n  }\n}"
+            }
+          },
+          "docs": "Streams generated tokens from a deployed model as Server-Sent Events."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Fine-Tuning",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Create a fine-tuning job.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.app.predibase.com/v2/finetuning/jobs",
+            "body": {
+              "type": "json",
+              "data": "{\n  \"base_model\": \"qwen3-8b\",\n  \"dataset\": \"my-dataset\",\n  \"repo\": \"my-repo\",\n  \"adapter_type\": \"lora\",\n  \"task\": \"sft\"\n}"
+            }
+          },
+          "docs": "Starts a supervised (sft) or reinforcement (grpo) fine-tuning job that trains a LoRA / Turbo LoRA adapter."
+        },
+        {
+          "info": {
+            "name": "List fine-tuning jobs.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.app.predibase.com/v2/finetuning/jobs"
+          },
+          "docs": "Lists fine-tuning jobs."
+        },
+        {
+          "info": {
+            "name": "Get a fine-tuning job.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.app.predibase.com/v2/finetuning/jobs/{{jobId}}"
+          },
+          "docs": "Gets a fine-tuning job."
+        },
+        {
+          "info": {
+            "name": "Cancel a fine-tuning job.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.app.predibase.com/v2/finetuning/jobs/{{jobId}}/cancel"
+          },
+          "docs": "Cancels a fine-tuning job."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Adapters",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Create an adapter repository.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.app.predibase.com/v2/repos",
+            "body": {
+              "type": "json",
+              "data": "{\n  \"name\": \"my-repo\",\n  \"description\": \"My adapter repository\"\n}"
+            }
+          },
+          "docs": "Creates an adapter repository."
+        },
+        {
+          "info": {
+            "name": "List adapter repositories.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.app.predibase.com/v2/repos"
+          },
+          "docs": "Lists adapter repositories."
+        },
+        {
+          "info": {
+            "name": "Get an adapter repository.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.app.predibase.com/v2/repos/{{repoName}}"
+          },
+          "docs": "Gets an adapter repository and its versions."
+        },
+        {
+          "info": {
+            "name": "Delete an adapter repository.",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.app.predibase.com/v2/repos/{{repoName}}"
+          },
+          "docs": "Deletes an adapter repository."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Deployments",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Create a dedicated deployment.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.app.predibase.com/v2/deployments",
+            "body": {
+              "type": "json",
+              "data": "{\n  \"name\": \"my-qwen3-8b\",\n  \"base_model\": \"qwen3-8b\",\n  \"accelerator\": \"a10_24gb\",\n  \"min_replicas\": 0,\n  \"max_replicas\": 1\n}"
+            }
+          },
+          "docs": "Creates a dedicated or private serverless deployment of a base model on a GPU accelerator with LoRA serving enabled."
+        },
+        {
+          "info": {
+            "name": "List deployments.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.app.predibase.com/v2/deployments"
+          },
+          "docs": "Lists deployments."
+        },
+        {
+          "info": {
+            "name": "Get a deployment.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.app.predibase.com/v2/deployments/{{deploymentName}}"
+          },
+          "docs": "Gets a deployment."
+        },
+        {
+          "info": {
+            "name": "Delete a deployment.",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.app.predibase.com/v2/deployments/{{deploymentName}}"
+          },
+          "docs": "Deletes a deployment."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Datasets",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Connect or upload a dataset.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.app.predibase.com/v2/datasets",
+            "body": {
+              "type": "json",
+              "data": "{\n  \"name\": \"my-dataset\",\n  \"source\": \"file\"\n}"
+            }
+          },
+          "docs": "Connects or uploads a dataset for use in fine-tuning jobs."
+        },
+        {
+          "info": {
+            "name": "List datasets.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.app.predibase.com/v2/datasets"
+          },
+          "docs": "Lists datasets."
+        },
+        {
+          "info": {
+            "name": "Get a dataset.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.app.predibase.com/v2/datasets/{{datasetName}}"
+          },
+          "docs": "Gets a dataset."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Models",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List supported base models.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.app.predibase.com/v2/models"
+          },
+          "docs": "Lists open-source base models supported for fine-tuning and serving."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Batch Inference",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Create a batch inference job.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.app.predibase.com/v2/batch-inference/jobs",
+            "body": {
+              "type": "json",
+              "data": "{\n  \"base_model\": \"qwen3-8b\",\n  \"dataset\": \"my-input-dataset\",\n  \"output\": \"my-output\"\n}"
+            }
+          },
+          "docs": "Launches an asynchronous batch inference job with optional per-row adapter selection."
+        },
+        {
+          "info": {
+            "name": "List batch inference jobs.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.app.predibase.com/v2/batch-inference/jobs"
+          },
+          "docs": "Lists batch inference jobs."
+        },
+        {
+          "info": {
+            "name": "Get a batch inference job.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.app.predibase.com/v2/batch-inference/jobs/{{jobId}}"
+          },
+          "docs": "Gets a batch inference job."
+        }
+      ]
+    }
+  ]
+}

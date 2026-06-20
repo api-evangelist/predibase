@@ -1,0 +1,79 @@
+aid: predibase
+name: Predibase
+review:
+  question: Does Predibase expose a documented public WebSocket API?
+  answer: false
+  date: '2026-06-20'
+  reviewer: API Evangelist
+  asyncapiSpecCreated: true
+  asyncapiScopeNote: |
+    Per API Evangelist scope, HTTP Server-Sent Events (SSE) is in-scope for
+    AsyncAPI modeling. An AsyncAPI 2.6 document was created at
+    asyncapi/predibase-asyncapi.yml describing the inference SSE streams: the
+    OpenAI-compatible chat completion stream (POST /v1/chat/completions with
+    stream=true) and the native token stream (POST /generate_stream). No
+    WebSocket surface was modeled because none is documented.
+findings:
+  summary: |
+    Predibase does not publish a documented public WebSocket API. The platform
+    exposes two HTTPS REST planes: an inference (serving) plane at
+    https://serving.app.predibase.com/{tenant}/deployments/v2/llms/{model}
+    (OpenAI-compatible /v1/chat/completions and /v1/completions, plus native
+    /generate and /generate_stream), and a control plane at
+    https://api.app.predibase.com for fine-tuning jobs, adapters, deployments,
+    datasets, and models. Streaming is delivered as HTTP Server-Sent Events
+    via stream=true on chat completions and via the /generate_stream endpoint;
+    SSE is a one-way HTTP streaming transport and is not WebSocket. No realtime,
+    bidirectional WebSocket (ws:// or wss://) endpoint is documented.
+  transports:
+    - protocol: REST
+      scheme: https
+      baseURL: https://serving.app.predibase.com/{tenant}/deployments/v2/llms/{model}
+      documented: true
+    - protocol: REST
+      scheme: https
+      baseURL: https://api.app.predibase.com
+      documented: true
+    - protocol: SSE
+      scheme: https
+      note: Server-Sent Events delivered over /v1/chat/completions when stream=true and over /generate_stream. Not WebSocket.
+      documented: true
+    - protocol: WebSocket
+      scheme: wss
+      documented: false
+      note: No WebSocket endpoint is documented in Predibase's inference or control-plane reference as of the review date.
+  endpointsConfirmedRest:
+    - POST https://serving.app.predibase.com/{tenant}/deployments/v2/llms/{model}/v1/chat/completions
+    - POST https://serving.app.predibase.com/{tenant}/deployments/v2/llms/{model}/v1/completions
+    - POST https://serving.app.predibase.com/{tenant}/deployments/v2/llms/{model}/generate
+    - POST https://serving.app.predibase.com/{tenant}/deployments/v2/llms/{model}/generate_stream
+    - POST https://api.app.predibase.com/v2/finetuning/jobs
+    - GET  https://api.app.predibase.com/v2/finetuning/jobs/{jobId}
+    - POST https://api.app.predibase.com/v2/repos
+    - POST https://api.app.predibase.com/v2/deployments
+    - GET  https://api.app.predibase.com/v2/deployments/{deploymentName}
+    - POST https://api.app.predibase.com/v2/datasets
+    - GET  https://api.app.predibase.com/v2/models
+    - POST https://api.app.predibase.com/v2/batch-inference/jobs
+sources:
+  - url: https://docs.predibase.com/user-guide/inference/rest_api
+    type: APIReference
+    note: REST inference base URL serving.app.predibase.com with /generate and /generate_stream; Authorization API Token header.
+  - url: https://docs.predibase.com/user-guide/inference/migrate-openai
+    type: Documentation
+    note: OpenAI-compatible base URL .../deployments/v2/llms/{model}/v1 with /v1/chat/completions and /v1/completions; no WebSocket mentioned.
+  - url: https://docs.predibase.com/user-guide/inference/dedicated_deployments
+    type: Documentation
+    note: Dedicated deployments managed via SDK / control plane; no WebSocket surface.
+  - url: https://docs.predibase.com/user-guide/fine-tuning/overview
+    type: Documentation
+    note: Fine-tuning jobs (SFT and GRPO) produce LoRA / Turbo LoRA adapters; all HTTPS REST.
+actions:
+  asyncapiPath: asyncapi/predibase-asyncapi.yml
+  apisYmlUpdated: true
+  reason: |
+    No WebSocket protocol surface exists. Under the API Evangelist scope that
+    allows SSE in AsyncAPI, an AsyncAPI 2.6 document was authored for the
+    inference SSE streams (OpenAI-compatible chat completion stream and native
+    /generate_stream), with HTTP+SSE transport documented explicitly so SSE is
+    never misrepresented as WebSocket.

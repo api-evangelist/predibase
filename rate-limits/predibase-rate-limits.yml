@@ -1,0 +1,69 @@
+specification: API Commons Rate Limits
+specificationVersion: '0.1'
+schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main/schema/api-commons.yml#/$defs/RateLimits
+provider: Predibase
+providerId: predibase
+created: '2026-06-20'
+modified: '2026-06-20'
+reconciled: false
+tags:
+- AI
+- LLM
+- Fine-Tuning
+- Inference
+- LoRA
+- Rate Limiting
+- Quotas
+- Throttling
+description: >-
+  Predibase enforces account-level limits that differ by surface. Serverless
+  (shared endpoint) inference has a free-tier token allowance (approximately
+  1M tokens/day and 10M tokens/month) and per-account throughput limits;
+  dedicated deployments scale throughput with the provisioned GPU accelerator
+  and replica count rather than a fixed request quota. Fine-tuning and batch
+  inference are queued jobs. Specific per-account values are visible in the
+  Predibase console and are not reconciled in this artifact.
+notes: >-
+  Verify per-account and per-deployment limits in the Predibase console on
+  reconciliation; serverless allowances and dedicated throughput change with
+  tier and provisioned hardware.
+sources:
+- https://docs.predibase.com/user-guide/inference/shared_endpoints
+- https://docs.predibase.com/user-guide/inference/dedicated_deployments
+- https://predibase.com/pricing
+responseCodes:
+  throttled: 429
+limits:
+- name: Serverless Token Allowance (Free)
+  scope: account
+  metric: tokens
+  limit: ~1M tokens/day, ~10M tokens/month (free tier)
+  notes: Shared endpoint serverless inference allowance before paid usage.
+- name: Serverless Throughput
+  scope: account
+  metric: requests
+  limit: see provider console
+  notes: Per-account concurrency / throughput on shared endpoints.
+- name: Dedicated Deployment Throughput
+  scope: deployment
+  metric: requests
+  limit: scales with GPU accelerator and replica count
+  notes: Throughput is governed by provisioned hardware, not a fixed quota.
+- name: Fine-Tuning Jobs
+  scope: account
+  metric: jobs
+  limit: queued; concurrency varies by tier
+  notes: Supervised and GRPO jobs queue and run on managed training infrastructure.
+- name: Batch Inference Jobs
+  scope: account
+  metric: jobs
+  limit: queued; separate from realtime serving
+  notes: Async batch jobs deploy the base model and load adapters automatically.
+policies:
+- name: Tiered Limits
+  description: Allowances and throughput rise from Free to Developer (dedicated) to Enterprise agreements.
+- name: Backoff Strategy
+  description: Clients should implement exponential backoff with jitter and honor Retry-After on 429 responses.
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com

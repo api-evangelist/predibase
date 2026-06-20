@@ -1,0 +1,198 @@
+aid: predibase
+url: https://raw.githubusercontent.com/api-evangelist/predibase/refs/heads/main/apis.yml
+name: Predibase
+kind: company
+description: Predibase is a platform for fine-tuning and serving open-source LLMs.
+  It pairs efficient LoRA / Turbo LoRA supervised and reinforcement (GRPO) fine-tuning
+  with serverless and dedicated inference powered by LoRAX, the open-source multi-LoRA
+  serving stack that packs hundreds of adapters onto a single GPU. Inference is
+  exposed through an OpenAI-compatible API plus native generate endpoints.
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+tags:
+- AI
+- LLM
+- Fine-Tuning
+- Inference
+- LoRA
+created: '2026-06-20'
+modified: '2026-06-20'
+specificationVersion: '0.19'
+apis:
+- aid: predibase:predibase-inference-openai-api
+  name: Predibase Inference (OpenAI-Compatible) API
+  tags:
+  - Chat
+  - Completions
+  - LLM
+  - OpenAI Compatible
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://docs.predibase.com/user-guide/inference/migrate-openai
+  baseURL: https://serving.app.predibase.com/{tenant}/deployments/v2/llms/{model}/v1
+  properties:
+  - url: https://docs.predibase.com/user-guide/inference/migrate-openai
+    type: Documentation
+  - url: https://docs.predibase.com/user-guide/inference/rest_api
+    type: APIReference
+  - url: openapi/predibase-openapi.yml
+    type: OpenAPI
+  - url: asyncapi/predibase-asyncapi.yml
+    type: AsyncAPI
+  - url: collections/predibase.postman_collection.json
+    type: PostmanCollection
+  description: OpenAI-compatible chat completions and completions served from
+    Predibase serverless and dedicated deployments, with per-request LoRA adapter
+    selection via the model field and SSE streaming when stream is true.
+- aid: predibase:predibase-prompt-generate-api
+  name: Predibase Prompt / Generate API
+  tags:
+  - Prompt
+  - Generate
+  - Streaming
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://docs.predibase.com/user-guide/inference/rest_api
+  baseURL: https://serving.app.predibase.com/{tenant}/deployments/v2/llms/{model}
+  properties:
+  - url: https://docs.predibase.com/user-guide/inference/rest_api
+    type: Documentation
+  - url: https://docs.predibase.com/user-guide/inference/querying-models/text-generation
+    type: APIReference
+  - url: openapi/predibase-openapi.yml
+    type: OpenAPI
+  - url: collections/predibase.postman_collection.json
+    type: PostmanCollection
+  description: Native text-generation endpoints (generate and generate_stream) for
+    prompting deployed base models and fine-tuned adapters, with adapter source
+    selection (pbase, hub, or s3) and token-streaming responses.
+- aid: predibase:predibase-fine-tuning-api
+  name: Predibase Fine-Tuning API
+  tags:
+  - Fine-Tuning
+  - LoRA
+  - GRPO
+  - Reinforcement Learning
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://docs.predibase.com/user-guide/fine-tuning/overview
+  baseURL: https://api.app.predibase.com/v2
+  properties:
+  - url: https://docs.predibase.com/user-guide/fine-tuning/overview
+    type: Documentation
+  - url: https://docs.predibase.com/user-guide/fine-tuning/grpo
+    type: Documentation
+  - url: openapi/predibase-openapi.yml
+    type: OpenAPI
+  - url: collections/predibase.postman_collection.json
+    type: PostmanCollection
+  description: Create and manage supervised and reinforcement (GRPO) fine-tuning
+    jobs that train efficient LoRA / Turbo LoRA adapters on top of open-source base
+    models, returning adapter versions for serving.
+- aid: predibase:predibase-adapters-api
+  name: Predibase Adapters API
+  tags:
+  - Adapters
+  - Repos
+  - Versions
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://docs.predibase.com/fine-tuning/adapters
+  baseURL: https://api.app.predibase.com/v2
+  properties:
+  - url: https://docs.predibase.com/fine-tuning/adapters
+    type: Documentation
+  - url: openapi/predibase-openapi.yml
+    type: OpenAPI
+  - url: collections/predibase.postman_collection.json
+    type: PostmanCollection
+  description: Manage adapter repositories and the trained adapter versions inside
+    them - the LoRA artifacts produced by fine-tuning jobs that are loaded onto
+    deployments for inference.
+- aid: predibase:predibase-deployments-api
+  name: Predibase Deployments API
+  tags:
+  - Deployments
+  - Dedicated
+  - Serverless
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://docs.predibase.com/user-guide/inference/dedicated_deployments
+  baseURL: https://api.app.predibase.com/v2
+  properties:
+  - url: https://docs.predibase.com/user-guide/inference/dedicated_deployments
+    type: Documentation
+  - url: https://docs.predibase.com/user-guide/inference/private_deployments
+    type: Documentation
+  - url: openapi/predibase-openapi.yml
+    type: OpenAPI
+  - url: collections/predibase.postman_collection.json
+    type: PostmanCollection
+  description: Create, read, update, and delete dedicated and private serverless
+    deployments, selecting a base model and GPU accelerator (A10, A100) and
+    enabling LoRA serving for fine-tuned adapters.
+- aid: predibase:predibase-datasets-api
+  name: Predibase Datasets API
+  tags:
+  - Datasets
+  - Training Data
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://docs.predibase.com/user-guide/getting-started/fine-tuning-and-serving
+  baseURL: https://api.app.predibase.com/v2
+  properties:
+  - url: https://docs.predibase.com/user-guide/getting-started/fine-tuning-and-serving
+    type: Documentation
+  - url: openapi/predibase-openapi.yml
+    type: OpenAPI
+  - url: collections/predibase.postman_collection.json
+    type: PostmanCollection
+  description: Connect and manage datasets used as input to fine-tuning jobs,
+    uploaded from files or referenced from connected storage.
+- aid: predibase:predibase-models-api
+  name: Predibase Models API
+  tags:
+  - Models
+  - Catalog
+  - Base Models
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://docs.predibase.com/user-guide/inference/models
+  baseURL: https://api.app.predibase.com/v2
+  properties:
+  - url: https://docs.predibase.com/user-guide/inference/models
+    type: Documentation
+  - url: openapi/predibase-openapi.yml
+    type: OpenAPI
+  - url: collections/predibase.postman_collection.json
+    type: PostmanCollection
+  description: List the open-source base models supported on Predibase for
+    fine-tuning and serving, with metadata used when creating jobs and deployments.
+- aid: predibase:predibase-batch-inference-api
+  name: Predibase Batch Inference API
+  tags:
+  - Batch
+  - Async
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://docs.predibase.com/user-guide/inference/BatchInference
+  baseURL: https://api.app.predibase.com/v2
+  properties:
+  - url: https://docs.predibase.com/user-guide/inference/BatchInference
+    type: Documentation
+  - url: openapi/predibase-openapi.yml
+    type: OpenAPI
+  - url: collections/predibase.postman_collection.json
+    type: PostmanCollection
+  description: Launch asynchronous batch inference jobs against a base model with
+    per-row adapter selection, billed at a flat per-million-token batch rate for
+    non-realtime workloads.
+common:
+- type: GitHubOrganization
+  url: https://github.com/predibase
+- type: LinkedIn
+  url: https://www.linkedin.com/company/predibase
+- type: Website
+  url: https://predibase.com
+- type: Documentation
+  url: https://docs.predibase.com
+- type: Plans
+  url: plans/predibase-plans-pricing.yml
+- type: RateLimits
+  url: rate-limits/predibase-rate-limits.yml
+- type: FinOps
+  url: finops/predibase-finops.yml
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com

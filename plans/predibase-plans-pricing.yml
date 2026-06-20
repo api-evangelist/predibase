@@ -1,0 +1,159 @@
+specification: API Commons Plans
+specificationVersion: '0.1'
+schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main/schema/api-commons.yml#/$defs/Plans
+provider: Predibase
+providerId: predibase
+created: '2026-06-20'
+modified: '2026-06-20'
+reconciled: true
+tags:
+- AI
+- LLM
+- Fine-Tuning
+- Inference
+- LoRA
+- Plans
+description: >-
+  Predibase uses usage-based pricing across three meters: serverless inference
+  billed per token, fine-tuning (training) billed per token of training data
+  scaled by base-model size, and dedicated deployments billed per GPU-hour by
+  accelerator type. A free tier provides serverless inference up to a daily and
+  monthly token cap; the Developer tier adds self-serve dedicated A10/A100
+  deployments; the Enterprise tier adds VPC / multi-GPU (A100/H100) deployments
+  and negotiated terms.
+notes: >-
+  Representative rates as published on the Predibase pricing page and docs;
+  fine-tuning per-token rates scale with model size and dedicated GPU-hour
+  rates vary by accelerator. Verify current rates on the pricing page. Predibase
+  was acquired by Rubrik in June 2025.
+sources:
+- https://predibase.com/pricing
+- https://docs.predibase.com/user-guide/inference/dedicated_deployments
+- https://docs.predibase.com/user-guide/fine-tuning/overview
+plans:
+- id: predibase-free
+  name: Free
+  type: free
+  description: >-
+    Serverless inference on shared endpoints up to a daily and monthly token
+    cap, with no cost to start.
+  entries:
+  - label: Serverless Inference (free allowance)
+    name: serverless_free
+    type: free
+    metric: tokens
+    limit: 10000000
+    timeFrame: month
+    geo: global
+    unit: 1000000
+    price: free up to ~1M tokens/day and ~10M tokens/month
+    userMultiplied: false
+  elements:
+  - name: Shared Endpoints
+  - name: OpenAI-Compatible Inference
+- id: predibase-pay-as-you-go
+  name: Pay-as-you-go
+  type: usage
+  description: >-
+    Token-metered serverless inference, token-metered fine-tuning, and
+    GPU-hour-metered dedicated deployments with no monthly minimum beyond usage.
+  entries:
+  - label: Serverless Inference
+    name: serverless_inference
+    type: usage
+    metric: tokens
+    limit: -1
+    timeFrame: month
+    geo: global
+    unit: 1000000
+    price: ~$0.20 per 1M tokens (small models; varies by model size)
+    userMultiplied: false
+  - label: Batch Inference
+    name: batch_inference
+    type: usage
+    metric: tokens
+    limit: -1
+    timeFrame: month
+    geo: global
+    unit: 1000000
+    price: ~$0.50 per 1M tokens (flat, input and output)
+    userMultiplied: false
+  - label: Fine-Tuning (up to 7B)
+    name: finetuning_7b
+    type: usage
+    metric: tokens
+    limit: -1
+    timeFrame: month
+    geo: global
+    unit: 1000000
+    price: from ~$0.36 per 1M training tokens
+    userMultiplied: false
+  - label: Fine-Tuning (large / MoE, e.g. Mixtral-8x7B)
+    name: finetuning_large
+    type: usage
+    metric: tokens
+    limit: -1
+    timeFrame: month
+    geo: global
+    unit: 1000000
+    price: up to ~$3.21 per 1M training tokens
+    userMultiplied: false
+  elements:
+  - name: Serverless Inference
+  - name: Batch Inference
+  - name: Supervised Fine-Tuning
+  - name: Reinforcement Fine-Tuning (GRPO)
+- id: predibase-developer
+  name: Developer (Dedicated Deployments)
+  type: usage
+  description: >-
+    Self-serve dedicated deployments billed per GPU-hour on A10 and A100
+    accelerators for production traffic.
+  entries:
+  - label: Dedicated A10G (24GB)
+    name: dedicated_a10
+    type: usage
+    metric: hours
+    limit: -1
+    timeFrame: month
+    geo: global
+    unit: 1
+    price: from ~$1.82 per GPU-hour
+    userMultiplied: false
+  - label: Dedicated A100 (80GB)
+    name: dedicated_a100
+    type: usage
+    metric: hours
+    limit: -1
+    timeFrame: month
+    geo: global
+    unit: 1
+    price: per GPU-hour (see pricing page)
+    userMultiplied: false
+  elements:
+  - name: Dedicated Deployments
+  - name: LoRA / Turbo LoRA Serving
+- id: predibase-enterprise
+  name: Enterprise
+  type: enterprise
+  description: >-
+    VPC / private cloud deployments, multi-GPU and H100 deployments, dedicated
+    support, and negotiated terms. Contact Predibase sales.
+  entries:
+  - label: Enterprise Agreement
+    name: enterprise
+    type: flat
+    metric: contract
+    limit: -1
+    timeFrame: year
+    geo: global
+    unit: 1
+    price: contact sales
+    userMultiplied: false
+  elements:
+  - name: VPC / Private Deployments
+  - name: H100 and Multi-GPU
+  - name: Custom Volume Pricing
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com
