@@ -1,0 +1,23 @@
+generated: '2026-07-11'
+method: probed
+source: live DNS/TLS/HTTP probes of apis.yml + OpenAPI hosts
+hosts:
+- host: predibase.com
+  https: true
+  tls_version: TLSv1.3
+  cert_expires: Sep 22 15:45:16 2026 GMT
+  hsts: null
+- host: docs.predibase.com
+  https: true
+  tls_version: TLSv1.3
+  cert_expires: Sep 22 15:45:16 2026 GMT
+  hsts: null
+- host: api.app.predibase.com
+  https: false
+domains:
+- domain: predibase.com
+  dnssec: false
+  caa: []
+  spf: false
+  dmarc: true
+  dmarc_policy: none
