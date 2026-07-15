@@ -179,6 +179,8 @@ apis:
     per-row adapter selection, billed at a flat per-million-token batch rate for
     non-realtime workloads.
 common:
+- type: AgenticAccess
+  url: agentic-access/predibase-agentic-access.yml
 - type: DomainSecurity
   url: security/predibase-domain-security.yml
 - type: Authentication
