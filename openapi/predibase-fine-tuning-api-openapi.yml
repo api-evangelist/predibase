@@ -1,0 +1,132 @@
+openapi: 3.0.1
+info:
+  title: Predibase Adapters Fine-Tuning API
+  description: 'Specification of the Predibase API surfaces documented at https://docs.predibase.com. Two planes are covered: (1) the inference data plane on https://serving.app.predibase.com, which exposes an OpenAI-compatible chat/completions interface plus native generate / generate_stream text-generation endpoints, scoped per tenant and deployment; and (2) the control plane on https://api.app.predibase.com, which manages fine-tuning jobs, adapter repositories, deployments, datasets, and base models. All endpoints authenticate with a Predibase API token sent as an HTTP Bearer token.'
+  termsOfService: https://predibase.com/terms-of-service
+  contact:
+    name: Predibase Support
+    email: support@predibase.com
+    url: https://docs.predibase.com
+  version: '2.0'
+servers:
+- url: https://serving.app.predibase.com/{tenant}/deployments/v2/llms/{model}
+  description: Inference (serving) base. tenant is your Predibase tenant ID (Settings > My Profile); model is the deployment name (Deployments page). The OpenAI-compatible routes live under the /v1 suffix of this base.
+  variables:
+    tenant:
+      default: TENANT_ID
+      description: Predibase tenant ID.
+    model:
+      default: DEPLOYMENT_NAME
+      description: Deployment name (base model deployment).
+- url: https://api.app.predibase.com/v2
+  description: Control plane base for fine-tuning, adapters, deployments, datasets, and models.
+security:
+- bearerAuth: []
+tags:
+- name: Fine-Tuning
+paths:
+  /finetuning/jobs:
+    post:
+      operationId: createFinetuningJob
+      tags:
+      - Fine-Tuning
+      summary: Create a fine-tuning job.
+      description: Starts a supervised or reinforcement (GRPO) fine-tuning job that trains a LoRA / Turbo LoRA adapter on a base model using a connected dataset, producing a new adapter version in the target repository.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/FinetuningJobRequest'
+      responses:
+        '200':
+          description: The created fine-tuning job.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FinetuningJob'
+    get:
+      operationId: listFinetuningJobs
+      tags:
+      - Fine-Tuning
+      summary: List fine-tuning jobs.
+      responses:
+        '200':
+          description: A list of fine-tuning jobs.
+  /finetuning/jobs/{jobId}:
+    get:
+      operationId: getFinetuningJob
+      tags:
+      - Fine-Tuning
+      summary: Get a fine-tuning job.
+      parameters:
+      - name: jobId
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: The fine-tuning job.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/FinetuningJob'
+  /finetuning/jobs/{jobId}/cancel:
+    post:
+      operationId: cancelFinetuningJob
+      tags:
+      - Fine-Tuning
+      summary: Cancel a fine-tuning job.
+      parameters:
+      - name: jobId
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: The cancelled fine-tuning job.
+components:
+  schemas:
+    FinetuningJob:
+      type: object
+      properties:
+        id:
+          type: string
+        status:
+          type: string
+        base_model:
+          type: string
+        repo:
+          type: string
+    FinetuningJobRequest:
+      type: object
+      required:
+      - base_model
+      - dataset
+      properties:
+        base_model:
+          type: string
+        dataset:
+          type: string
+        repo:
+          type: string
+          description: Target adapter repository for the resulting adapter version.
+        adapter_type:
+          type: string
+          enum:
+          - lora
+          - turbo_lora
+        task:
+          type: string
+          enum:
+          - sft
+          - grpo
+          description: Supervised fine-tuning (sft) or reinforcement fine-tuning (grpo).
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: Predibase API token
+      description: 'Predibase API token sent as Authorization: Bearer <PREDIBASE_API_TOKEN>. Generate a token from Settings in the Predibase console.'

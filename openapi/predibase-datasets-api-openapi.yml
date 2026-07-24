@@ -1,0 +1,82 @@
+openapi: 3.0.1
+info:
+  title: Predibase Adapters Datasets API
+  description: 'Specification of the Predibase API surfaces documented at https://docs.predibase.com. Two planes are covered: (1) the inference data plane on https://serving.app.predibase.com, which exposes an OpenAI-compatible chat/completions interface plus native generate / generate_stream text-generation endpoints, scoped per tenant and deployment; and (2) the control plane on https://api.app.predibase.com, which manages fine-tuning jobs, adapter repositories, deployments, datasets, and base models. All endpoints authenticate with a Predibase API token sent as an HTTP Bearer token.'
+  termsOfService: https://predibase.com/terms-of-service
+  contact:
+    name: Predibase Support
+    email: support@predibase.com
+    url: https://docs.predibase.com
+  version: '2.0'
+servers:
+- url: https://serving.app.predibase.com/{tenant}/deployments/v2/llms/{model}
+  description: Inference (serving) base. tenant is your Predibase tenant ID (Settings > My Profile); model is the deployment name (Deployments page). The OpenAI-compatible routes live under the /v1 suffix of this base.
+  variables:
+    tenant:
+      default: TENANT_ID
+      description: Predibase tenant ID.
+    model:
+      default: DEPLOYMENT_NAME
+      description: Deployment name (base model deployment).
+- url: https://api.app.predibase.com/v2
+  description: Control plane base for fine-tuning, adapters, deployments, datasets, and models.
+security:
+- bearerAuth: []
+tags:
+- name: Datasets
+paths:
+  /datasets:
+    post:
+      operationId: createDataset
+      tags:
+      - Datasets
+      summary: Connect or upload a dataset.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DatasetRequest'
+      responses:
+        '200':
+          description: The created dataset.
+    get:
+      operationId: listDatasets
+      tags:
+      - Datasets
+      summary: List datasets.
+      responses:
+        '200':
+          description: A list of datasets.
+  /datasets/{datasetName}:
+    get:
+      operationId: getDataset
+      tags:
+      - Datasets
+      summary: Get a dataset.
+      parameters:
+      - name: datasetName
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: The dataset.
+components:
+  schemas:
+    DatasetRequest:
+      type: object
+      required:
+      - name
+      properties:
+        name:
+          type: string
+        source:
+          type: string
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: Predibase API token
+      description: 'Predibase API token sent as Authorization: Bearer <PREDIBASE_API_TOKEN>. Generate a token from Settings in the Predibase console.'

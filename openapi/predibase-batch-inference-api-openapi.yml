@@ -1,0 +1,86 @@
+openapi: 3.0.1
+info:
+  title: Predibase Adapters Batch Inference API
+  description: 'Specification of the Predibase API surfaces documented at https://docs.predibase.com. Two planes are covered: (1) the inference data plane on https://serving.app.predibase.com, which exposes an OpenAI-compatible chat/completions interface plus native generate / generate_stream text-generation endpoints, scoped per tenant and deployment; and (2) the control plane on https://api.app.predibase.com, which manages fine-tuning jobs, adapter repositories, deployments, datasets, and base models. All endpoints authenticate with a Predibase API token sent as an HTTP Bearer token.'
+  termsOfService: https://predibase.com/terms-of-service
+  contact:
+    name: Predibase Support
+    email: support@predibase.com
+    url: https://docs.predibase.com
+  version: '2.0'
+servers:
+- url: https://serving.app.predibase.com/{tenant}/deployments/v2/llms/{model}
+  description: Inference (serving) base. tenant is your Predibase tenant ID (Settings > My Profile); model is the deployment name (Deployments page). The OpenAI-compatible routes live under the /v1 suffix of this base.
+  variables:
+    tenant:
+      default: TENANT_ID
+      description: Predibase tenant ID.
+    model:
+      default: DEPLOYMENT_NAME
+      description: Deployment name (base model deployment).
+- url: https://api.app.predibase.com/v2
+  description: Control plane base for fine-tuning, adapters, deployments, datasets, and models.
+security:
+- bearerAuth: []
+tags:
+- name: Batch Inference
+paths:
+  /batch-inference/jobs:
+    post:
+      operationId: createBatchInferenceJob
+      tags:
+      - Batch Inference
+      summary: Create a batch inference job.
+      description: Launches an asynchronous batch inference job against a base model with optional per-row adapter selection. Predibase deploys the target base model and loads any required adapters automatically.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BatchInferenceJobRequest'
+      responses:
+        '200':
+          description: The created batch inference job.
+    get:
+      operationId: listBatchInferenceJobs
+      tags:
+      - Batch Inference
+      summary: List batch inference jobs.
+      responses:
+        '200':
+          description: A list of batch inference jobs.
+  /batch-inference/jobs/{jobId}:
+    get:
+      operationId: getBatchInferenceJob
+      tags:
+      - Batch Inference
+      summary: Get a batch inference job.
+      parameters:
+      - name: jobId
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: The batch inference job.
+components:
+  schemas:
+    BatchInferenceJobRequest:
+      type: object
+      required:
+      - base_model
+      - dataset
+      properties:
+        base_model:
+          type: string
+        dataset:
+          type: string
+        output:
+          type: string
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: Predibase API token
+      description: 'Predibase API token sent as Authorization: Bearer <PREDIBASE_API_TOKEN>. Generate a token from Settings in the Predibase console.'
