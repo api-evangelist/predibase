@@ -1,0 +1,26 @@
+{
+  "provider": "predibase",
+  "sources": [
+    "predibase-adapters-api-openapi.yml",
+    "predibase-batch-inference-api-openapi.yml",
+    "predibase-datasets-api-openapi.yml",
+    "predibase-deployments-api-openapi.yml",
+    "predibase-fine-tuning-api-openapi.yml",
+    "predibase-inference-api-openapi.yml",
+    "predibase-models-api-openapi.yml"
+  ],
+  "outputs": [
+    "predibase-adapters-api-openapi.yml",
+    "predibase-batch-inference-api-openapi.yml",
+    "predibase-datasets-api-openapi.yml",
+    "predibase-deployments-api-openapi.yml",
+    "predibase-fine-tuning-api-openapi.yml",
+    "predibase-inference-api-openapi.yml",
+    "predibase-models-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [],
+  "skipped": []
+}
