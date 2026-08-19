@@ -1,0 +1,499 @@
+{
+  "item": [
+    {
+      "id": "164e2689-2c1a-4137-a9e9-3aac23334f20",
+      "name": "Deployments",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "2bf802a4-63d9-4511-a30c-c5080820a63d",
+          "name": "Create a dedicated deployment.",
+          "request": {
+            "name": "Create a dedicated deployment.",
+            "description": {
+              "content": "Creates a dedicated or private serverless deployment of a base model on a selected GPU accelerator (e.g. a10_24gb, a100_80gb), with LoRA serving enabled for fine-tuned adapters.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "deployments"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": "Predibase tenant ID.",
+                  "type": "any",
+                  "value": "{{tenant}}",
+                  "key": "tenant"
+                },
+                {
+                  "description": "Deployment name (base model deployment).",
+                  "type": "any",
+                  "value": "{{model}}",
+                  "key": "model"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"<string>\",\n  \"base_model\": \"<string>\",\n  \"accelerator\": \"<string>\",\n  \"min_replicas\": \"<integer>\",\n  \"max_replicas\": \"<integer>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "6d7f44e9-c9b8-40bc-9656-fb8d0b827b73",
+              "name": "The created deployment.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "deployments"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "Predibase tenant ID.",
+                      "type": "any",
+                      "value": "{{tenant}}",
+                      "key": "tenant"
+                    },
+                    {
+                      "description": "Deployment name (base model deployment).",
+                      "type": "any",
+                      "value": "{{model}}",
+                      "key": "model"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"base_model\": \"<string>\",\n  \"accelerator\": \"<string>\",\n  \"min_replicas\": \"<integer>\",\n  \"max_replicas\": \"<integer>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"name\": \"string\",\n  \"base_model\": \"string\",\n  \"accelerator\": \"string\",\n  \"status\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "a380f67f-c21e-4ca8-9cd8-287a14ca1d86",
+          "name": "List deployments.",
+          "request": {
+            "name": "List deployments.",
+            "description": {},
+            "url": {
+              "path": [
+                "deployments"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": "Predibase tenant ID.",
+                  "type": "any",
+                  "value": "{{tenant}}",
+                  "key": "tenant"
+                },
+                {
+                  "description": "Deployment name (base model deployment).",
+                  "type": "any",
+                  "value": "{{model}}",
+                  "key": "model"
+                }
+              ]
+            },
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "547348ac-024f-44ad-bcc4-e36398b6856c",
+              "name": "A list of deployments.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "deployments"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "Predibase tenant ID.",
+                      "type": "any",
+                      "value": "{{tenant}}",
+                      "key": "tenant"
+                    },
+                    {
+                      "description": "Deployment name (base model deployment).",
+                      "type": "any",
+                      "value": "{{model}}",
+                      "key": "model"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "e28aae2a-aae1-453d-a4c8-9933ba3a521e",
+          "name": "Get a deployment.",
+          "request": {
+            "name": "Get a deployment.",
+            "description": {},
+            "url": {
+              "path": [
+                "deployments",
+                ":deploymentName"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "deploymentName",
+                  "description": "(Required) "
+                },
+                {
+                  "description": "Predibase tenant ID.",
+                  "type": "any",
+                  "value": "{{tenant}}",
+                  "key": "tenant"
+                },
+                {
+                  "description": "Deployment name (base model deployment).",
+                  "type": "any",
+                  "value": "{{model}}",
+                  "key": "model"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "6b886d74-bb8a-4dd6-a860-06dd7916819b",
+              "name": "The deployment.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "deployments",
+                    ":deploymentName"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "deploymentName",
+                      "description": "(Required) "
+                    },
+                    {
+                      "description": "Predibase tenant ID.",
+                      "type": "any",
+                      "value": "{{tenant}}",
+                      "key": "tenant"
+                    },
+                    {
+                      "description": "Deployment name (base model deployment).",
+                      "type": "any",
+                      "value": "{{model}}",
+                      "key": "model"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"name\": \"string\",\n  \"base_model\": \"string\",\n  \"accelerator\": \"string\",\n  \"status\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "a8814729-9267-41d2-b7b2-bf626ba24a3f",
+          "name": "Delete a deployment.",
+          "request": {
+            "name": "Delete a deployment.",
+            "description": {},
+            "url": {
+              "path": [
+                "deployments",
+                ":deploymentName"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "deploymentName",
+                  "description": "(Required) "
+                },
+                {
+                  "description": "Predibase tenant ID.",
+                  "type": "any",
+                  "value": "{{tenant}}",
+                  "key": "tenant"
+                },
+                {
+                  "description": "Deployment name (base model deployment).",
+                  "type": "any",
+                  "value": "{{model}}",
+                  "key": "model"
+                }
+              ]
+            },
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "63c6ae5c-07fb-48df-9a70-af0e46831f28",
+              "name": "The deployment was deleted.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "deployments",
+                    ":deploymentName"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "deploymentName",
+                      "description": "(Required) "
+                    },
+                    {
+                      "description": "Predibase tenant ID.",
+                      "type": "any",
+                      "value": "{{tenant}}",
+                      "key": "tenant"
+                    },
+                    {
+                      "description": "Deployment name (base model deployment).",
+                      "type": "any",
+                      "value": "{{model}}",
+                      "key": "model"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "description": {
+        "content": "Predibase tenant ID.",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "TENANT_ID",
+      "key": "tenant"
+    },
+    {
+      "description": {
+        "content": "Deployment name (base model deployment).",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "DEPLOYMENT_NAME",
+      "key": "model"
+    },
+    {
+      "type": "string",
+      "value": "https://serving.app.predibase.com/{{tenant}}/deployments/v2/llms/{{model}}",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "4a8681f9-1071-4eb2-b08d-7a19348afc4c",
+    "name": "Predibase Adapters Deployments API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Specification of the Predibase API surfaces documented at https://docs.predibase.com. Two planes are covered: (1) the inference data plane on https://serving.app.predibase.com, which exposes an OpenAI-compatible chat/completions interface plus native generate / generate_stream text-generation endpoints, scoped per tenant and deployment; and (2) the control plane on https://api.app.predibase.com, which manages fine-tuning jobs, adapter repositories, deployments, datasets, and base models. All endpoints authenticate with a Predibase API token sent as an HTTP Bearer token.\n\nContact Support:\n Name: Predibase Support\n Email: support@predibase.com",
+      "type": "text/plain"
+    }
+  }
+}

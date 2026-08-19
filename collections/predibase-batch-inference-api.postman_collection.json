@@ -1,0 +1,380 @@
+{
+  "item": [
+    {
+      "id": "27295869-8eaf-4376-9546-20ac924a63cf",
+      "name": "Batch Inference",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "f879b6ae-582a-4909-815b-c0cbfb28732e",
+          "name": "Create a batch inference job.",
+          "request": {
+            "name": "Create a batch inference job.",
+            "description": {
+              "content": "Launches an asynchronous batch inference job against a base model with optional per-row adapter selection. Predibase deploys the target base model and loads any required adapters automatically.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "batch-inference",
+                "jobs"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": "Predibase tenant ID.",
+                  "type": "any",
+                  "value": "{{tenant}}",
+                  "key": "tenant"
+                },
+                {
+                  "description": "Deployment name (base model deployment).",
+                  "type": "any",
+                  "value": "{{model}}",
+                  "key": "model"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"base_model\": \"<string>\",\n  \"dataset\": \"<string>\",\n  \"output\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "ed53ddf6-6bc6-425e-9e3c-e24fb8a56cbd",
+              "name": "The created batch inference job.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "batch-inference",
+                    "jobs"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "Predibase tenant ID.",
+                      "type": "any",
+                      "value": "{{tenant}}",
+                      "key": "tenant"
+                    },
+                    {
+                      "description": "Deployment name (base model deployment).",
+                      "type": "any",
+                      "value": "{{model}}",
+                      "key": "model"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"base_model\": \"<string>\",\n  \"dataset\": \"<string>\",\n  \"output\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "15e8465f-8565-48e3-8877-88bfdadb753d",
+          "name": "List batch inference jobs.",
+          "request": {
+            "name": "List batch inference jobs.",
+            "description": {},
+            "url": {
+              "path": [
+                "batch-inference",
+                "jobs"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": "Predibase tenant ID.",
+                  "type": "any",
+                  "value": "{{tenant}}",
+                  "key": "tenant"
+                },
+                {
+                  "description": "Deployment name (base model deployment).",
+                  "type": "any",
+                  "value": "{{model}}",
+                  "key": "model"
+                }
+              ]
+            },
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "f6ebeb85-e7ae-4b1f-9008-0e59c01bc4fc",
+              "name": "A list of batch inference jobs.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "batch-inference",
+                    "jobs"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "Predibase tenant ID.",
+                      "type": "any",
+                      "value": "{{tenant}}",
+                      "key": "tenant"
+                    },
+                    {
+                      "description": "Deployment name (base model deployment).",
+                      "type": "any",
+                      "value": "{{model}}",
+                      "key": "model"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "e953dd88-ad4e-4c8d-a7ff-22117ef3272e",
+          "name": "Get a batch inference job.",
+          "request": {
+            "name": "Get a batch inference job.",
+            "description": {},
+            "url": {
+              "path": [
+                "batch-inference",
+                "jobs",
+                ":jobId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "jobId",
+                  "description": "(Required) "
+                },
+                {
+                  "description": "Predibase tenant ID.",
+                  "type": "any",
+                  "value": "{{tenant}}",
+                  "key": "tenant"
+                },
+                {
+                  "description": "Deployment name (base model deployment).",
+                  "type": "any",
+                  "value": "{{model}}",
+                  "key": "model"
+                }
+              ]
+            },
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "05d77966-c8c6-4999-b6dd-892664cd1c4d",
+              "name": "The batch inference job.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "batch-inference",
+                    "jobs",
+                    ":jobId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "jobId",
+                      "description": "(Required) "
+                    },
+                    {
+                      "description": "Predibase tenant ID.",
+                      "type": "any",
+                      "value": "{{tenant}}",
+                      "key": "tenant"
+                    },
+                    {
+                      "description": "Deployment name (base model deployment).",
+                      "type": "any",
+                      "value": "{{model}}",
+                      "key": "model"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "description": {
+        "content": "Predibase tenant ID.",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "TENANT_ID",
+      "key": "tenant"
+    },
+    {
+      "description": {
+        "content": "Deployment name (base model deployment).",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "DEPLOYMENT_NAME",
+      "key": "model"
+    },
+    {
+      "type": "string",
+      "value": "https://serving.app.predibase.com/{{tenant}}/deployments/v2/llms/{{model}}",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "fb6d05b4-9824-4067-9783-9e0e460dcf60",
+    "name": "Predibase Adapters Batch Inference API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Specification of the Predibase API surfaces documented at https://docs.predibase.com. Two planes are covered: (1) the inference data plane on https://serving.app.predibase.com, which exposes an OpenAI-compatible chat/completions interface plus native generate / generate_stream text-generation endpoints, scoped per tenant and deployment; and (2) the control plane on https://api.app.predibase.com, which manages fine-tuning jobs, adapter repositories, deployments, datasets, and base models. All endpoints authenticate with a Predibase API token sent as an HTTP Bearer token.\n\nContact Support:\n Name: Predibase Support\n Email: support@predibase.com",
+      "type": "text/plain"
+    }
+  }
+}

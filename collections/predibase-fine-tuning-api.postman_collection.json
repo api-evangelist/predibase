@@ -1,0 +1,509 @@
+{
+  "item": [
+    {
+      "id": "a8e5303a-605f-4613-b237-de32e9773ca0",
+      "name": "Fine-Tuning",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "ab9ea212-bc0f-4476-8bea-fdff9f5f05b5",
+          "name": "Create a fine-tuning job.",
+          "request": {
+            "name": "Create a fine-tuning job.",
+            "description": {
+              "content": "Starts a supervised or reinforcement (GRPO) fine-tuning job that trains a LoRA / Turbo LoRA adapter on a base model using a connected dataset, producing a new adapter version in the target repository.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "finetuning",
+                "jobs"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": "Predibase tenant ID.",
+                  "type": "any",
+                  "value": "{{tenant}}",
+                  "key": "tenant"
+                },
+                {
+                  "description": "Deployment name (base model deployment).",
+                  "type": "any",
+                  "value": "{{model}}",
+                  "key": "model"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"base_model\": \"<string>\",\n  \"dataset\": \"<string>\",\n  \"repo\": \"<string>\",\n  \"adapter_type\": \"<string>\",\n  \"task\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "d27afa05-b16c-40a2-990a-6a0d09bf047c",
+              "name": "The created fine-tuning job.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "finetuning",
+                    "jobs"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "Predibase tenant ID.",
+                      "type": "any",
+                      "value": "{{tenant}}",
+                      "key": "tenant"
+                    },
+                    {
+                      "description": "Deployment name (base model deployment).",
+                      "type": "any",
+                      "value": "{{model}}",
+                      "key": "model"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"base_model\": \"<string>\",\n  \"dataset\": \"<string>\",\n  \"repo\": \"<string>\",\n  \"adapter_type\": \"<string>\",\n  \"task\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"status\": \"string\",\n  \"base_model\": \"string\",\n  \"repo\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "a3f4d4ef-89a8-42f2-85d0-ebfebe0261d0",
+          "name": "List fine-tuning jobs.",
+          "request": {
+            "name": "List fine-tuning jobs.",
+            "description": {},
+            "url": {
+              "path": [
+                "finetuning",
+                "jobs"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": "Predibase tenant ID.",
+                  "type": "any",
+                  "value": "{{tenant}}",
+                  "key": "tenant"
+                },
+                {
+                  "description": "Deployment name (base model deployment).",
+                  "type": "any",
+                  "value": "{{model}}",
+                  "key": "model"
+                }
+              ]
+            },
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "ffd84a58-0888-4b3c-8608-2a096fe22d2f",
+              "name": "A list of fine-tuning jobs.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "finetuning",
+                    "jobs"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "Predibase tenant ID.",
+                      "type": "any",
+                      "value": "{{tenant}}",
+                      "key": "tenant"
+                    },
+                    {
+                      "description": "Deployment name (base model deployment).",
+                      "type": "any",
+                      "value": "{{model}}",
+                      "key": "model"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "b0a87eee-dfb0-43af-8c09-8e7149ed7ddc",
+          "name": "Get a fine-tuning job.",
+          "request": {
+            "name": "Get a fine-tuning job.",
+            "description": {},
+            "url": {
+              "path": [
+                "finetuning",
+                "jobs",
+                ":jobId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "jobId",
+                  "description": "(Required) "
+                },
+                {
+                  "description": "Predibase tenant ID.",
+                  "type": "any",
+                  "value": "{{tenant}}",
+                  "key": "tenant"
+                },
+                {
+                  "description": "Deployment name (base model deployment).",
+                  "type": "any",
+                  "value": "{{model}}",
+                  "key": "model"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "97db44ad-6701-4d4d-b05a-81b4e082054a",
+              "name": "The fine-tuning job.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "finetuning",
+                    "jobs",
+                    ":jobId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "jobId",
+                      "description": "(Required) "
+                    },
+                    {
+                      "description": "Predibase tenant ID.",
+                      "type": "any",
+                      "value": "{{tenant}}",
+                      "key": "tenant"
+                    },
+                    {
+                      "description": "Deployment name (base model deployment).",
+                      "type": "any",
+                      "value": "{{model}}",
+                      "key": "model"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\",\n  \"status\": \"string\",\n  \"base_model\": \"string\",\n  \"repo\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "2e4de03f-af6c-4adb-9392-1956d42d8937",
+          "name": "Cancel a fine-tuning job.",
+          "request": {
+            "name": "Cancel a fine-tuning job.",
+            "description": {},
+            "url": {
+              "path": [
+                "finetuning",
+                "jobs",
+                ":jobId",
+                "cancel"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "jobId",
+                  "description": "(Required) "
+                },
+                {
+                  "description": "Predibase tenant ID.",
+                  "type": "any",
+                  "value": "{{tenant}}",
+                  "key": "tenant"
+                },
+                {
+                  "description": "Deployment name (base model deployment).",
+                  "type": "any",
+                  "value": "{{model}}",
+                  "key": "model"
+                }
+              ]
+            },
+            "method": "POST",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "61ac1afb-c86f-4ada-8560-e4e37b79755f",
+              "name": "The cancelled fine-tuning job.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "finetuning",
+                    "jobs",
+                    ":jobId",
+                    "cancel"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "jobId",
+                      "description": "(Required) "
+                    },
+                    {
+                      "description": "Predibase tenant ID.",
+                      "type": "any",
+                      "value": "{{tenant}}",
+                      "key": "tenant"
+                    },
+                    {
+                      "description": "Deployment name (base model deployment).",
+                      "type": "any",
+                      "value": "{{model}}",
+                      "key": "model"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "description": {
+        "content": "Predibase tenant ID.",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "TENANT_ID",
+      "key": "tenant"
+    },
+    {
+      "description": {
+        "content": "Deployment name (base model deployment).",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "DEPLOYMENT_NAME",
+      "key": "model"
+    },
+    {
+      "type": "string",
+      "value": "https://serving.app.predibase.com/{{tenant}}/deployments/v2/llms/{{model}}",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "963ca06c-cca8-4936-9d2b-510e6c7f2e48",
+    "name": "Predibase Adapters Fine-Tuning API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Specification of the Predibase API surfaces documented at https://docs.predibase.com. Two planes are covered: (1) the inference data plane on https://serving.app.predibase.com, which exposes an OpenAI-compatible chat/completions interface plus native generate / generate_stream text-generation endpoints, scoped per tenant and deployment; and (2) the control plane on https://api.app.predibase.com, which manages fine-tuning jobs, adapter repositories, deployments, datasets, and base models. All endpoints authenticate with a Predibase API token sent as an HTTP Bearer token.\n\nContact Support:\n Name: Predibase Support\n Email: support@predibase.com",
+      "type": "text/plain"
+    }
+  }
+}

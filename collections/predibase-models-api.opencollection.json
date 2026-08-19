@@ -1,0 +1,35 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Predibase Adapters Models API",
+    "version": "2.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Models",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List supported base models.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://serving.app.predibase.com/{tenant}/deployments/v2/llms/{model}/models"
+          },
+          "docs": "List supported base models."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

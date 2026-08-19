@@ -1,0 +1,478 @@
+{
+  "item": [
+    {
+      "id": "27786255-87ff-481b-bf0c-6371e2dc77d9",
+      "name": "Adapters",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "eee81dea-c300-405e-9a3f-d1f856e2c310",
+          "name": "Create an adapter repository.",
+          "request": {
+            "name": "Create an adapter repository.",
+            "description": {},
+            "url": {
+              "path": [
+                "repos"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": "Predibase tenant ID.",
+                  "type": "any",
+                  "value": "{{tenant}}",
+                  "key": "tenant"
+                },
+                {
+                  "description": "Deployment name (base model deployment).",
+                  "type": "any",
+                  "value": "{{model}}",
+                  "key": "model"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"<string>\",\n  \"description\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "c5bb6697-9b40-4ad1-8d05-582df604957e",
+              "name": "The created adapter repository.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "repos"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "Predibase tenant ID.",
+                      "type": "any",
+                      "value": "{{tenant}}",
+                      "key": "tenant"
+                    },
+                    {
+                      "description": "Deployment name (base model deployment).",
+                      "type": "any",
+                      "value": "{{model}}",
+                      "key": "model"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"description\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "6933ac85-b0e6-4a16-a964-ef9c0ceb48f4",
+          "name": "List adapter repositories.",
+          "request": {
+            "name": "List adapter repositories.",
+            "description": {},
+            "url": {
+              "path": [
+                "repos"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": "Predibase tenant ID.",
+                  "type": "any",
+                  "value": "{{tenant}}",
+                  "key": "tenant"
+                },
+                {
+                  "description": "Deployment name (base model deployment).",
+                  "type": "any",
+                  "value": "{{model}}",
+                  "key": "model"
+                }
+              ]
+            },
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "9f71dc96-caf6-4dce-a22c-206dbc57f764",
+              "name": "A list of adapter repositories.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "repos"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "Predibase tenant ID.",
+                      "type": "any",
+                      "value": "{{tenant}}",
+                      "key": "tenant"
+                    },
+                    {
+                      "description": "Deployment name (base model deployment).",
+                      "type": "any",
+                      "value": "{{model}}",
+                      "key": "model"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "c32f242a-7a20-4b89-a474-e66305d3c4cb",
+          "name": "Get an adapter repository.",
+          "request": {
+            "name": "Get an adapter repository.",
+            "description": {},
+            "url": {
+              "path": [
+                "repos",
+                ":repoName"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "repoName",
+                  "description": "(Required) "
+                },
+                {
+                  "description": "Predibase tenant ID.",
+                  "type": "any",
+                  "value": "{{tenant}}",
+                  "key": "tenant"
+                },
+                {
+                  "description": "Deployment name (base model deployment).",
+                  "type": "any",
+                  "value": "{{model}}",
+                  "key": "model"
+                }
+              ]
+            },
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "ef53e0f9-499c-4460-b301-f124d459cf0f",
+              "name": "The adapter repository and its versions.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "repos",
+                    ":repoName"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "repoName",
+                      "description": "(Required) "
+                    },
+                    {
+                      "description": "Predibase tenant ID.",
+                      "type": "any",
+                      "value": "{{tenant}}",
+                      "key": "tenant"
+                    },
+                    {
+                      "description": "Deployment name (base model deployment).",
+                      "type": "any",
+                      "value": "{{model}}",
+                      "key": "model"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "13eeb9b6-13b7-43a0-b22b-c161931d0199",
+          "name": "Delete an adapter repository.",
+          "request": {
+            "name": "Delete an adapter repository.",
+            "description": {},
+            "url": {
+              "path": [
+                "repos",
+                ":repoName"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "repoName",
+                  "description": "(Required) "
+                },
+                {
+                  "description": "Predibase tenant ID.",
+                  "type": "any",
+                  "value": "{{tenant}}",
+                  "key": "tenant"
+                },
+                {
+                  "description": "Deployment name (base model deployment).",
+                  "type": "any",
+                  "value": "{{model}}",
+                  "key": "model"
+                }
+              ]
+            },
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "ab5d4b14-acb0-489a-8491-66f287bd6b43",
+              "name": "The repository was deleted.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "repos",
+                    ":repoName"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "repoName",
+                      "description": "(Required) "
+                    },
+                    {
+                      "description": "Predibase tenant ID.",
+                      "type": "any",
+                      "value": "{{tenant}}",
+                      "key": "tenant"
+                    },
+                    {
+                      "description": "Deployment name (base model deployment).",
+                      "type": "any",
+                      "value": "{{model}}",
+                      "key": "model"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "description": {
+        "content": "Predibase tenant ID.",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "TENANT_ID",
+      "key": "tenant"
+    },
+    {
+      "description": {
+        "content": "Deployment name (base model deployment).",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "DEPLOYMENT_NAME",
+      "key": "model"
+    },
+    {
+      "type": "string",
+      "value": "https://serving.app.predibase.com/{{tenant}}/deployments/v2/llms/{{model}}",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "c0f62001-5277-4aa0-9e68-cd5eddc869ac",
+    "name": "Predibase Adapters API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Specification of the Predibase API surfaces documented at https://docs.predibase.com. Two planes are covered: (1) the inference data plane on https://serving.app.predibase.com, which exposes an OpenAI-compatible chat/completions interface plus native generate / generate_stream text-generation endpoints, scoped per tenant and deployment; and (2) the control plane on https://api.app.predibase.com, which manages fine-tuning jobs, adapter repositories, deployments, datasets, and base models. All endpoints authenticate with a Predibase API token sent as an HTTP Bearer token.\n\nContact Support:\n Name: Predibase Support\n Email: support@predibase.com",
+      "type": "text/plain"
+    }
+  }
+}

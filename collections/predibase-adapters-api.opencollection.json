@@ -1,0 +1,86 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Predibase Adapters API",
+    "version": "2.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Adapters",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List adapter repositories.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://serving.app.predibase.com/{tenant}/deployments/v2/llms/{model}/repos"
+          },
+          "docs": "List adapter repositories."
+        },
+        {
+          "info": {
+            "name": "Create an adapter repository.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://serving.app.predibase.com/{tenant}/deployments/v2/llms/{model}/repos",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create an adapter repository."
+        },
+        {
+          "info": {
+            "name": "Get an adapter repository.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://serving.app.predibase.com/{tenant}/deployments/v2/llms/{model}/repos/:repoName",
+            "params": [
+              {
+                "name": "repoName",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get an adapter repository."
+        },
+        {
+          "info": {
+            "name": "Delete an adapter repository.",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://serving.app.predibase.com/{tenant}/deployments/v2/llms/{model}/repos/:repoName",
+            "params": [
+              {
+                "name": "repoName",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Delete an adapter repository."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

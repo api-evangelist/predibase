@@ -1,0 +1,86 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Predibase Adapters Deployments API",
+    "version": "2.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Deployments",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List deployments.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://serving.app.predibase.com/{tenant}/deployments/v2/llms/{model}/deployments"
+          },
+          "docs": "List deployments."
+        },
+        {
+          "info": {
+            "name": "Create a dedicated deployment.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://serving.app.predibase.com/{tenant}/deployments/v2/llms/{model}/deployments",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a dedicated or private serverless deployment of a base model on a selected GPU accelerator (e.g. a10_24gb, a100_80gb), with LoRA serving enabled for fine-tuned adapters."
+        },
+        {
+          "info": {
+            "name": "Get a deployment.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://serving.app.predibase.com/{tenant}/deployments/v2/llms/{model}/deployments/:deploymentName",
+            "params": [
+              {
+                "name": "deploymentName",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get a deployment."
+        },
+        {
+          "info": {
+            "name": "Delete a deployment.",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://serving.app.predibase.com/{tenant}/deployments/v2/llms/{model}/deployments/:deploymentName",
+            "params": [
+              {
+                "name": "deploymentName",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Delete a deployment."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

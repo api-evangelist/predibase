@@ -1,0 +1,68 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Predibase Adapters Batch Inference API",
+    "version": "2.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Batch Inference",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List batch inference jobs.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://serving.app.predibase.com/{tenant}/deployments/v2/llms/{model}/batch-inference/jobs"
+          },
+          "docs": "List batch inference jobs."
+        },
+        {
+          "info": {
+            "name": "Create a batch inference job.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://serving.app.predibase.com/{tenant}/deployments/v2/llms/{model}/batch-inference/jobs",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Launches an asynchronous batch inference job against a base model with optional per-row adapter selection. Predibase deploys the target base model and loads any required adapters automatically."
+        },
+        {
+          "info": {
+            "name": "Get a batch inference job.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://serving.app.predibase.com/{tenant}/deployments/v2/llms/{model}/batch-inference/jobs/:jobId",
+            "params": [
+              {
+                "name": "jobId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get a batch inference job."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,150 @@
+{
+  "item": [
+    {
+      "id": "d9ac3edf-beae-4a06-a93b-9121febfb448",
+      "name": "Models",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "e1e564b4-a5b7-442b-9b67-2a00e8889bd9",
+          "name": "List supported base models.",
+          "request": {
+            "name": "List supported base models.",
+            "description": {},
+            "url": {
+              "path": [
+                "models"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": "Predibase tenant ID.",
+                  "type": "any",
+                  "value": "{{tenant}}",
+                  "key": "tenant"
+                },
+                {
+                  "description": "Deployment name (base model deployment).",
+                  "type": "any",
+                  "value": "{{model}}",
+                  "key": "model"
+                }
+              ]
+            },
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "93fce8be-e8a0-400d-a601-95505e150ab5",
+              "name": "A list of supported base models.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "models"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "Predibase tenant ID.",
+                      "type": "any",
+                      "value": "{{tenant}}",
+                      "key": "tenant"
+                    },
+                    {
+                      "description": "Deployment name (base model deployment).",
+                      "type": "any",
+                      "value": "{{model}}",
+                      "key": "model"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "description": {
+        "content": "Predibase tenant ID.",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "TENANT_ID",
+      "key": "tenant"
+    },
+    {
+      "description": {
+        "content": "Deployment name (base model deployment).",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "DEPLOYMENT_NAME",
+      "key": "model"
+    },
+    {
+      "type": "string",
+      "value": "https://serving.app.predibase.com/{{tenant}}/deployments/v2/llms/{{model}}",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "e7f58f90-83d0-437d-b603-936ff0af2242",
+    "name": "Predibase Adapters Models API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Specification of the Predibase API surfaces documented at https://docs.predibase.com. Two planes are covered: (1) the inference data plane on https://serving.app.predibase.com, which exposes an OpenAI-compatible chat/completions interface plus native generate / generate_stream text-generation endpoints, scoped per tenant and deployment; and (2) the control plane on https://api.app.predibase.com, which manages fine-tuning jobs, adapter repositories, deployments, datasets, and base models. All endpoints authenticate with a Predibase API token sent as an HTTP Bearer token.\n\nContact Support:\n Name: Predibase Support\n Email: support@predibase.com",
+      "type": "text/plain"
+    }
+  }
+}

@@ -1,0 +1,68 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Predibase Adapters Datasets API",
+    "version": "2.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Datasets",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List datasets.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://serving.app.predibase.com/{tenant}/deployments/v2/llms/{model}/datasets"
+          },
+          "docs": "List datasets."
+        },
+        {
+          "info": {
+            "name": "Connect or upload a dataset.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://serving.app.predibase.com/{tenant}/deployments/v2/llms/{model}/datasets",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Connect or upload a dataset."
+        },
+        {
+          "info": {
+            "name": "Get a dataset.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://serving.app.predibase.com/{tenant}/deployments/v2/llms/{model}/datasets/:datasetName",
+            "params": [
+              {
+                "name": "datasetName",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get a dataset."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
