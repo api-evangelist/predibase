@@ -22,6 +22,12 @@ accessModel:
   method: derived
 image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/predibase.png
 tags:
+- Artificial Intelligence
+- LLM
+- Fine-Tuning
+- Inference
+- LoRA
+tags_raw:
 - AI
 - LLM
 - Fine-Tuning
@@ -151,6 +157,8 @@ apis:
   humanURL: https://docs.predibase.com/user-guide/inference/migrate-openai
   baseURL: https://serving.app.predibase.com/{tenant}/deployments/v2/llms/{model}/v1
   tags:
+  - Deployment
+  tags_raw:
   - Deployments
   properties:
   - type: OpenAPI
