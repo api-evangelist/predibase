@@ -7,6 +7,18 @@ description: Predibase is a platform for fine-tuning and serving open-source LLM
   with serverless and dedicated inference powered by LoRAX, the open-source multi-LoRA
   serving stack that packs hundreds of adapters onto a single GPU. Inference is
   exposed through an OpenAI-compatible API plus native generate endpoints.
+deliveryModel:
+  model: saas
+  open_source: false
+  commercial: true
+  callable_host: false
+  label: Hosted service · you call their endpoint
+  confidence: medium
+  source:
+  - openapi
+  - pricing
+  generated: '2026-08-28'
+  method: derived
 accessModel:
   pricing: freemium
   onboarding: self-serve
