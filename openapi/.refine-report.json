@@ -1,13 +1,7 @@
 {
   "provider": "predibase",
   "sources": [
-    "predibase-adapters-api-openapi.yml",
-    "predibase-batch-inference-api-openapi.yml",
-    "predibase-datasets-api-openapi.yml",
-    "predibase-deployments-api-openapi.yml",
-    "predibase-fine-tuning-api-openapi.yml",
-    "predibase-inference-api-openapi.yml",
-    "predibase-models-api-openapi.yml"
+    "_original/predibase-openapi.yml"
   ],
   "outputs": [
     "predibase-adapters-api-openapi.yml",
@@ -21,6 +15,25 @@
   "archived": [],
   "errors": [],
   "warnings": [],
-  "notes": [],
-  "skipped": []
+  "notes": [
+    "sourced from openapi/_original/ (1 archived document(s)); previously refined output at the top level was skipped rather than re-split",
+    "predibase-openapi.yml: upgraded openapi 3.0.1 -> OpenAPI 3.2.0",
+    "predibase-openapi.yml: declared missing tag: Adapters",
+    "predibase-openapi.yml: declared missing tag: Batch Inference",
+    "predibase-openapi.yml: declared missing tag: Datasets",
+    "predibase-openapi.yml: declared missing tag: Deployments",
+    "predibase-openapi.yml: declared missing tag: Fine-Tuning",
+    "predibase-openapi.yml: declared missing tag: Inference",
+    "predibase-openapi.yml: declared missing tag: Models",
+    "apis.yml register: already-registered"
+  ],
+  "skipped": [
+    "predibase-adapters-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "predibase-batch-inference-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "predibase-datasets-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "predibase-deployments-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "predibase-fine-tuning-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "predibase-inference-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "predibase-models-api-openapi.yml: previously refined output, superseded by openapi/_original/"
+  ]
 }

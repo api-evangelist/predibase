@@ -1,7 +1,7 @@
-openapi: 3.0.1
+openapi: 3.2.0
 info:
-  title: Predibase Adapters Inference API
-  description: 'Specification of the Predibase API surfaces documented at https://docs.predibase.com. Two planes are covered: (1) the inference data plane on https://serving.app.predibase.com, which exposes an OpenAI-compatible chat/completions interface plus native generate / generate_stream text-generation endpoints, scoped per tenant and deployment; and (2) the control plane on https://api.app.predibase.com, which manages fine-tuning jobs, adapter repositories, deployments, datasets, and base models. All endpoints authenticate with a Predibase API token sent as an HTTP Bearer token.'
+  title: Predibase Inference API
+  description: Specification of the Predibase API surfaces documented at https://docs.predibase.com.
   termsOfService: https://predibase.com/terms-of-service
   contact:
     name: Predibase Support
@@ -30,7 +30,7 @@ paths:
       operationId: createChatCompletion
       tags:
       - Inference
-      summary: OpenAI-compatible chat completion.
+      summary: OpenAI-compatible chat completion
       description: Creates a chat completion against the deployment named in the server URL. OpenAI Chat Completions v1 compatible. Set model to an adapter ID ("repo"/"version") to serve a fine-tuned LoRA on top of the base model, or leave it empty to use the base model. Set stream to true to receive Server-Sent Events.
       servers:
       - url: https://serving.app.predibase.com/{tenant}/deployments/v2/llms/{model}
@@ -60,7 +60,7 @@ paths:
       operationId: createCompletion
       tags:
       - Inference
-      summary: OpenAI-compatible text completion.
+      summary: OpenAI-compatible text completion
       description: Creates a text completion against the deployment named in the server URL. OpenAI Completions v1 compatible. Set model to an adapter ID to serve a fine-tuned LoRA.
       servers:
       - url: https://serving.app.predibase.com/{tenant}/deployments/v2/llms/{model}
@@ -87,7 +87,7 @@ paths:
       operationId: generate
       tags:
       - Inference
-      summary: Native text generation.
+      summary: Native text generation
       description: Generates text from a deployed model. The full URL is https://serving.app.predibase.com/{tenant}/deployments/v2/llms/{deployment}/generate. Optionally specify a LoRA adapter via parameters.adapter_id and parameters.adapter_source (pbase, hub, or s3).
       servers:
       - url: https://serving.app.predibase.com/{tenant}/deployments/v2/llms/{model}
@@ -114,7 +114,7 @@ paths:
       operationId: generateStream
       tags:
       - Inference
-      summary: Native streaming text generation.
+      summary: Native streaming text generation
       description: Streams generated tokens from a deployed model as Server-Sent Events. The full URL is https://serving.app.predibase.com/{tenant}/deployments/v2/llms/{deployment}/generate_stream.
       servers:
       - url: https://serving.app.predibase.com/{tenant}/deployments/v2/llms/{model}
@@ -138,27 +138,51 @@ paths:
                 type: string
 components:
   schemas:
-    ChatCompletionRequest:
+    CompletionResponse:
       type: object
-      required:
-      - messages
       properties:
-        model:
+        id:
           type: string
-          description: Adapter ID in the form "repo"/"version" to serve a fine-tuned LoRA, or empty to use the deployment's base model.
-        messages:
+        object:
+          type: string
+        choices:
           type: array
           items:
-            $ref: '#/components/schemas/ChatMessage'
-        max_tokens:
-          type: integer
-        temperature:
-          type: number
-        top_p:
-          type: number
-        stream:
-          type: boolean
-          description: When true, the response is delivered as Server-Sent Events.
+            type: object
+            properties:
+              text:
+                type: string
+              index:
+                type: integer
+              finish_reason:
+                type: string
+        usage:
+          $ref: '#/components/schemas/Usage'
+    GenerateRequest:
+      type: object
+      required:
+      - inputs
+      properties:
+        inputs:
+          type: string
+          description: The prompt text. Include the fine-tuning prompt template when querying fine-tuned models.
+        parameters:
+          type: object
+          properties:
+            max_new_tokens:
+              type: integer
+            temperature:
+              type: number
+            adapter_id:
+              type: string
+              description: Adapter to apply, e.g. "my-repo/1".
+            adapter_source:
+              type: string
+              enum:
+              - pbase
+              - hub
+              - s3
+              description: Where the adapter is loaded from.
     ChatMessage:
       type: object
       required:
@@ -197,22 +221,6 @@ components:
                 type: string
         usage:
           $ref: '#/components/schemas/Usage'
-    CompletionRequest:
-      type: object
-      required:
-      - prompt
-      properties:
-        model:
-          type: string
-          description: Adapter ID ("repo"/"version") or empty for the base model.
-        prompt:
-          type: string
-        max_tokens:
-          type: integer
-        temperature:
-          type: number
-        stream:
-          type: boolean
     GenerateResponse:
       type: object
       properties:
@@ -229,51 +237,43 @@ components:
           type: integer
         total_tokens:
           type: integer
-    GenerateRequest:
+    ChatCompletionRequest:
       type: object
       required:
-      - inputs
+      - messages
       properties:
-        inputs:
+        model:
           type: string
-          description: The prompt text. Include the fine-tuning prompt template when querying fine-tuned models.
-        parameters:
-          type: object
-          properties:
-            max_new_tokens:
-              type: integer
-            temperature:
-              type: number
-            adapter_id:
-              type: string
-              description: Adapter to apply, e.g. "my-repo/1".
-            adapter_source:
-              type: string
-              enum:
-              - pbase
-              - hub
-              - s3
-              description: Where the adapter is loaded from.
-    CompletionResponse:
-      type: object
-      properties:
-        id:
-          type: string
-        object:
-          type: string
-        choices:
+          description: Adapter ID in the form "repo"/"version" to serve a fine-tuned LoRA, or empty to use the deployment's base model.
+        messages:
           type: array
           items:
-            type: object
-            properties:
-              text:
-                type: string
-              index:
-                type: integer
-              finish_reason:
-                type: string
-        usage:
-          $ref: '#/components/schemas/Usage'
+            $ref: '#/components/schemas/ChatMessage'
+        max_tokens:
+          type: integer
+        temperature:
+          type: number
+        top_p:
+          type: number
+        stream:
+          type: boolean
+          description: When true, the response is delivered as Server-Sent Events.
+    CompletionRequest:
+      type: object
+      required:
+      - prompt
+      properties:
+        model:
+          type: string
+          description: Adapter ID ("repo"/"version") or empty for the base model.
+        prompt:
+          type: string
+        max_tokens:
+          type: integer
+        temperature:
+          type: number
+        stream:
+          type: boolean
   securitySchemes:
     bearerAuth:
       type: http

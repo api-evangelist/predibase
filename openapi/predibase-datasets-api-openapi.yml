@@ -1,7 +1,7 @@
-openapi: 3.0.1
+openapi: 3.2.0
 info:
-  title: Predibase Adapters Datasets API
-  description: 'Specification of the Predibase API surfaces documented at https://docs.predibase.com. Two planes are covered: (1) the inference data plane on https://serving.app.predibase.com, which exposes an OpenAI-compatible chat/completions interface plus native generate / generate_stream text-generation endpoints, scoped per tenant and deployment; and (2) the control plane on https://api.app.predibase.com, which manages fine-tuning jobs, adapter repositories, deployments, datasets, and base models. All endpoints authenticate with a Predibase API token sent as an HTTP Bearer token.'
+  title: Predibase Datasets API
+  description: Specification of the Predibase API surfaces documented at https://docs.predibase.com.
   termsOfService: https://predibase.com/terms-of-service
   contact:
     name: Predibase Support
@@ -30,7 +30,7 @@ paths:
       operationId: createDataset
       tags:
       - Datasets
-      summary: Connect or upload a dataset.
+      summary: Connect or upload a dataset
       requestBody:
         required: true
         content:
@@ -44,7 +44,7 @@ paths:
       operationId: listDatasets
       tags:
       - Datasets
-      summary: List datasets.
+      summary: List datasets
       responses:
         '200':
           description: A list of datasets.
@@ -53,7 +53,7 @@ paths:
       operationId: getDataset
       tags:
       - Datasets
-      summary: Get a dataset.
+      summary: Get a dataset
       parameters:
       - name: datasetName
         in: path

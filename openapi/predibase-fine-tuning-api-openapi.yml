@@ -1,7 +1,7 @@
-openapi: 3.0.1
+openapi: 3.2.0
 info:
-  title: Predibase Adapters Fine-Tuning API
-  description: 'Specification of the Predibase API surfaces documented at https://docs.predibase.com. Two planes are covered: (1) the inference data plane on https://serving.app.predibase.com, which exposes an OpenAI-compatible chat/completions interface plus native generate / generate_stream text-generation endpoints, scoped per tenant and deployment; and (2) the control plane on https://api.app.predibase.com, which manages fine-tuning jobs, adapter repositories, deployments, datasets, and base models. All endpoints authenticate with a Predibase API token sent as an HTTP Bearer token.'
+  title: Predibase Fine Tuning API
+  description: Specification of the Predibase API surfaces documented at https://docs.predibase.com.
   termsOfService: https://predibase.com/terms-of-service
   contact:
     name: Predibase Support
@@ -23,14 +23,14 @@ servers:
 security:
 - bearerAuth: []
 tags:
-- name: Fine-Tuning
+- name: Fine Tuning
 paths:
   /finetuning/jobs:
     post:
       operationId: createFinetuningJob
       tags:
-      - Fine-Tuning
-      summary: Create a fine-tuning job.
+      - Fine Tuning
+      summary: Create a fine-tuning job
       description: Starts a supervised or reinforcement (GRPO) fine-tuning job that trains a LoRA / Turbo LoRA adapter on a base model using a connected dataset, producing a new adapter version in the target repository.
       requestBody:
         required: true
@@ -48,8 +48,8 @@ paths:
     get:
       operationId: listFinetuningJobs
       tags:
-      - Fine-Tuning
-      summary: List fine-tuning jobs.
+      - Fine Tuning
+      summary: List fine-tuning jobs
       responses:
         '200':
           description: A list of fine-tuning jobs.
@@ -57,8 +57,8 @@ paths:
     get:
       operationId: getFinetuningJob
       tags:
-      - Fine-Tuning
-      summary: Get a fine-tuning job.
+      - Fine Tuning
+      summary: Get a fine-tuning job
       parameters:
       - name: jobId
         in: path
@@ -76,8 +76,8 @@ paths:
     post:
       operationId: cancelFinetuningJob
       tags:
-      - Fine-Tuning
-      summary: Cancel a fine-tuning job.
+      - Fine Tuning
+      summary: Cancel a fine-tuning job
       parameters:
       - name: jobId
         in: path
