@@ -40,12 +40,14 @@ tags:
 - Fine-Tuning
 - Inference
 - LoRA
+- Real-Time
 tags_raw:
 - AI
 - LLM
 - Fine-Tuning
 - Inference
 - LoRA
+- Real-Time
 created: '2026-06-20'
 modified: '2026-06-20'
 specificationVersion: '0.23'
