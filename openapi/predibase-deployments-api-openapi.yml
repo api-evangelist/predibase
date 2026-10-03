@@ -88,6 +88,17 @@ paths:
           description: The deployment was deleted.
 components:
   schemas:
+    Deployment:
+      type: object
+      properties:
+        name:
+          type: string
+        base_model:
+          type: string
+        accelerator:
+          type: string
+        status:
+          type: string
     DeploymentRequest:
       type: object
       required:
@@ -105,17 +116,6 @@ components:
           type: integer
         max_replicas:
           type: integer
-    Deployment:
-      type: object
-      properties:
-        name:
-          type: string
-        base_model:
-          type: string
-        accelerator:
-          type: string
-        status:
-          type: string
   securitySchemes:
     bearerAuth:
       type: http
