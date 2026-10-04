@@ -138,103 +138,6 @@ paths:
                 type: string
 components:
   schemas:
-    ChatCompletionRequest:
-      type: object
-      required:
-      - messages
-      properties:
-        model:
-          type: string
-          description: Adapter ID in the form "repo"/"version" to serve a fine-tuned LoRA, or empty to use the deployment's base model.
-        messages:
-          type: array
-          items:
-            $ref: '#/components/schemas/ChatMessage'
-        max_tokens:
-          type: integer
-        temperature:
-          type: number
-        top_p:
-          type: number
-        stream:
-          type: boolean
-          description: When true, the response is delivered as Server-Sent Events.
-    Usage:
-      type: object
-      properties:
-        prompt_tokens:
-          type: integer
-        completion_tokens:
-          type: integer
-        total_tokens:
-          type: integer
-    ChatCompletionResponse:
-      type: object
-      properties:
-        id:
-          type: string
-        object:
-          type: string
-        created:
-          type: integer
-        model:
-          type: string
-        choices:
-          type: array
-          items:
-            type: object
-            properties:
-              index:
-                type: integer
-              message:
-                $ref: '#/components/schemas/ChatMessage'
-              finish_reason:
-                type: string
-        usage:
-          $ref: '#/components/schemas/Usage'
-    CompletionResponse:
-      type: object
-      properties:
-        id:
-          type: string
-        object:
-          type: string
-        choices:
-          type: array
-          items:
-            type: object
-            properties:
-              text:
-                type: string
-              index:
-                type: integer
-              finish_reason:
-                type: string
-        usage:
-          $ref: '#/components/schemas/Usage'
-    CompletionRequest:
-      type: object
-      required:
-      - prompt
-      properties:
-        model:
-          type: string
-          description: Adapter ID ("repo"/"version") or empty for the base model.
-        prompt:
-          type: string
-        max_tokens:
-          type: integer
-        temperature:
-          type: number
-        stream:
-          type: boolean
-    GenerateResponse:
-      type: object
-      properties:
-        generated_text:
-          type: string
-        details:
-          type: object
     GenerateRequest:
       type: object
       required:
@@ -274,6 +177,103 @@ components:
           - assistant
         content:
           type: string
+    GenerateResponse:
+      type: object
+      properties:
+        generated_text:
+          type: string
+        details:
+          type: object
+    ChatCompletionResponse:
+      type: object
+      properties:
+        id:
+          type: string
+        object:
+          type: string
+        created:
+          type: integer
+        model:
+          type: string
+        choices:
+          type: array
+          items:
+            type: object
+            properties:
+              index:
+                type: integer
+              message:
+                $ref: '#/components/schemas/ChatMessage'
+              finish_reason:
+                type: string
+        usage:
+          $ref: '#/components/schemas/Usage'
+    Usage:
+      type: object
+      properties:
+        prompt_tokens:
+          type: integer
+        completion_tokens:
+          type: integer
+        total_tokens:
+          type: integer
+    CompletionResponse:
+      type: object
+      properties:
+        id:
+          type: string
+        object:
+          type: string
+        choices:
+          type: array
+          items:
+            type: object
+            properties:
+              text:
+                type: string
+              index:
+                type: integer
+              finish_reason:
+                type: string
+        usage:
+          $ref: '#/components/schemas/Usage'
+    ChatCompletionRequest:
+      type: object
+      required:
+      - messages
+      properties:
+        model:
+          type: string
+          description: Adapter ID in the form "repo"/"version" to serve a fine-tuned LoRA, or empty to use the deployment's base model.
+        messages:
+          type: array
+          items:
+            $ref: '#/components/schemas/ChatMessage'
+        max_tokens:
+          type: integer
+        temperature:
+          type: number
+        top_p:
+          type: number
+        stream:
+          type: boolean
+          description: When true, the response is delivered as Server-Sent Events.
+    CompletionRequest:
+      type: object
+      required:
+      - prompt
+      properties:
+        model:
+          type: string
+          description: Adapter ID ("repo"/"version") or empty for the base model.
+        prompt:
+          type: string
+        max_tokens:
+          type: integer
+        temperature:
+          type: number
+        stream:
+          type: boolean
   securitySchemes:
     bearerAuth:
       type: http
