@@ -1,0 +1,42 @@
+slug: predibase
+provider: Predibase
+generated_by: planning/capability-mapping/scripts/classify_capabilities.py
+model: claude-opus-5
+frame:
+- Software & Technology
+min_confidence: 0.7
+capability_model:
+  source: https://github.com/vincentmakes/turbo-ea-capabilities
+  license: CC-BY-4.0
+  attribution: Turbo EA Capabilities by Vincent Verdet — Turbo EA, https://github.com/vincentmakes/turbo-ea-capabilities,
+    CC BY 4.0
+  notice: NOTICE
+edge_count: 3
+edges:
+- tag: Fine Tuning
+  spec_file: predibase-fine-tuning-api-openapi.yml
+  capability_id: BC-610.60
+  capability_id_l1: BC-610
+  capability_name: Artificial Intelligence Management
+  confidence: 0.9
+  evidence: POST /finetuning/jobs  Create a fine-tuning job
+  reason: Fine-tuning job lifecycle (create, list, cancel) is explicitly ML model training — core AI/ML
+    model lifecycle management.
+- tag: Inference
+  spec_file: predibase-inference-api-openapi.yml
+  capability_id: BC-610.60
+  capability_id_l1: BC-610
+  capability_name: Artificial Intelligence Management
+  confidence: 0.8
+  evidence: POST /v1/chat/completions  OpenAI-compatible chat completion
+  reason: Serving LLM inference/text generation is operation of AI models at runtime, falling under Artificial
+    Intelligence Management.
+- tag: Batch Inference
+  spec_file: predibase-batch-inference-api-openapi.yml
+  capability_id: BC-610.60
+  capability_id_l1: BC-610
+  capability_name: Artificial Intelligence Management
+  confidence: 0.75
+  evidence: POST /batch-inference/jobs  Create a batch inference job
+  reason: Running batch LLM inference jobs is operation of ML models, part of the AI/ML model lifecycle
+    and MLOps capability. Slight ambiguity since it is also generic job orchestration.

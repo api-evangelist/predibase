@@ -321,6 +321,9 @@ apis:
   - type: Documentation
     url: https://docs.predibase.com/user-guide/inference/BatchInference
 common:
+- type: CapabilityMap
+  url: capabilities/predibase-capability-edges.yml
+  name: Predibase Business Capability Map
 - type: AgenticAccess
   url: agentic-access/predibase-agentic-access.yml
 - type: DomainSecurity
