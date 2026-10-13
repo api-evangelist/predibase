@@ -1,0 +1,42 @@
+edges:
+- partner_name: Portkey
+  partner: portkey
+  partner_match: router
+  channel: partner-built
+  direction: partner-built
+  type: coverage
+  relationship: system-coverage
+  evidence: https://github.com/Portkey-AI/gateway/tree/main/src/providers/predibase
+  coverage_role:
+  - provider
+  router_signals:
+    provider:
+      models: null
+      router_ids:
+      - predibase
+  matched_by: verified-token-table
+  detected_by: sweep-model-routing.py
+  first_seen: '2026-10-13'
+- partner_name: OpenAI
+  partner: openai
+  partner_match: domain
+  type: contract
+  channel: provider-built
+  relationship: compatible
+  direction: provider-built
+  evidence: https://github.com/api-evangelist/predibase/blob/main/openapi/predibase-inference-api-openapi.yml#L13
+  contract_reference:
+    repo: predibase
+    spec_file: predibase-inference-api-openapi.yml
+    property: description
+    value: OpenAI-compatible
+    note: 'predibase declares OpenAI compatibility: ''description: Inference (serving) base. tenant is your Predibase
+      tenant ID (Settings > My Profile); model is the deployment name (Deployments page). The OpenAI-c'''
+    detected_by: sweep-model-routing.py
+    detected: '2026-10-13'
+  detected_by: sweep-model-routing.py
+  first_seen: '2026-10-13'
+generated: '2026-10-13'
+method: searched
+checked:
+- https://github.com/Portkey-AI/gateway/tree/main/src/providers
