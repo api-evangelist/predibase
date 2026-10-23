@@ -36,7 +36,44 @@ edges:
     detected: '2026-10-15'
   detected_by: sweep-model-routing.py
   first_seen: '2026-10-13'
+- partner_name: Hugging Face (hugging-face-hub)
+  partner: hugging-face
+  partner_match: mirror
+  mirror_match: domain
+  type: marketplace
+  relationship: platform-app
+  direction: third-party
+  channel: partner-built
+  marketplace: hugging-face-hub
+  evidence: https://huggingface.co/predibase
+  mirror_of: hugging-face/integrations/hugging-face-integration-edges.yml
+  apps:
+  - predibase/countdown
+  - predibase/wordle-grpo
+  - predibase/glaive_function_calling
+  - predibase/ect-summarization
+  - predibase/wordle-sft
+  - predibase/conllpp
+  - predibase/deterministic_it_dataset
+  - predibase/conllpp_ner
+  - predibase/gsm8k
+  - predibase/dbpedia
+  - predibase/magicoder
+  - predibase/cnn
+  - predibase/customer_support
+  - predibase/glue_sst2
+  - predibase/glue_mrpc
+  - predibase
+  listing_count: 3
+  detected: '2026-10-23'
+  detected_by: mirror-platform-listings.py
+  category: Hugging Face Hub datasets
+  badges:
+  - Verified publisher (Hugging Face verified organisation)
 generated: '2026-10-13'
 method: searched
 checked:
 - https://github.com/Portkey-AI/gateway/tree/main/src/providers
+- hugging-face/integrations/hugging-face-integration-edges.yml
+source:
+- hugging-face/integrations/hugging-face-integration-edges.yml
