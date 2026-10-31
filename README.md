@@ -1,4 +1,4 @@
-# Predibase (predibase)
+# Predibase
 
 <!-- API-EVANGELIST-PROVENANCE:BEGIN -->
 > ### About this repository
@@ -66,199 +66,146 @@
 
 Predibase is a platform for fine-tuning and serving open-source LLMs. It pairs efficient LoRA / Turbo LoRA supervised and reinforcement (GRPO) fine-tuning with serverless and dedicated inference powered by LoRAX, the open-source multi-LoRA serving stack that packs hundreds of adapters onto a single GPU. Inference is exposed through an OpenAI-compatible API plus native generate endpoints.
 
-**APIs.json:** [https://raw.githubusercontent.com/api-evangelist/predibase/refs/heads/main/apis.yml](https://raw.githubusercontent.com/api-evangelist/predibase/refs/heads/main/apis.yml)
+**Areas:** Artificial Intelligence · LLM · Fine-Tuning · Inference · LoRA · Real-Time
 
-## Tags
+## Predibase on APIs.io
 
-- AI
-- LLM
-- Fine-Tuning
-- Inference
-- LoRA
+Everything profiled for Predibase is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/predibase/](https://apis.io/providers/predibase/)** — or go straight to one of the APIs or properties below.
 
-## Timestamps
+### APIs (7)
 
-- **Created:** 2026-06-20
-- **Modified:** 2026-06-20
+- [Predibase Adapters API](https://apis.io/apis/predibase/predibase-adapters-api/) — The Adapters API from Predibase — 2 operation(s) for adapters.
+- [Predibase Batch Inference API](https://apis.io/apis/predibase/predibase-batch-inference-api/) — The Batch Inference API from Predibase — 2 operation(s) for batch inference.
+- [Predibase Datasets API](https://apis.io/apis/predibase/predibase-datasets-api/) — The Datasets API from Predibase — 2 operation(s) for datasets.
+- [Predibase Deployments API](https://apis.io/apis/predibase/predibase-deployments-api/) — The Deployments API from Predibase — 2 operation(s) for deployments.
+- [Predibase Fine-Tuning API](https://apis.io/apis/predibase/predibase-fine-tuning-api/) — The Fine-Tuning API from Predibase — 3 operation(s) for fine-tuning.
+- [Predibase Inference API](https://apis.io/apis/predibase/predibase-inference-api/) — The Inference API from Predibase — 4 operation(s) for inference.
+- [Predibase Models API](https://apis.io/apis/predibase/predibase-models-api/) — The Models API from Predibase — 1 operation(s) for models.
 
-## APIs
+### Published properties
 
-### Predibase Inference (OpenAI-Compatible) API
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
 
-OpenAI-compatible chat completions and completions served from Predibase serverless and dedicated deployments, with per-request LoRA adapter selection via the model field and SSE streaming when stream is true.
+#### AsyncAPI (1)
 
-- **Human URL:** [https://docs.predibase.com/user-guide/inference/migrate-openai](https://docs.predibase.com/user-guide/inference/migrate-openai)
-- **Base URL:** `https://serving.app.predibase.com/{tenant}/deployments/v2/llms/{model}/v1`
+Event-driven and webhook contracts.
 
-#### Tags
+- [Predibase Inference Streaming (HTTP + SSE)](https://apis.io/asyncapis/predibase/predibase-asyncapi/)
 
-- Chat
-- Completions
-- LLM
-- OpenAI Compatible
+#### Event channels (2)
 
-#### Properties
+Individual events and webhooks the provider emits.
 
-- [Documentation](https://docs.predibase.com/user-guide/inference/migrate-openai)
-- [API Reference](https://docs.predibase.com/user-guide/inference/rest_api)
-- [OpenAPI](openapi/predibase-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [AsyncAPI](asyncapi/predibase-asyncapi.yml) — [AsyncAPI Specification](https://www.asyncapi.com/docs/reference/specification/latest)
-- [Postman Collection](collections/predibase.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/predibase.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+- [/generate_stream](https://apis.io/channels/predibase/generate-stream/)
+- [/v1/chat/completions](https://apis.io/channels/predibase/v1-chat-completions/)
 
-### Predibase Prompt / Generate API
+#### Agentic access (1)
 
-Native text-generation endpoints (generate and generate_stream) for prompting deployed base models and fine-tuned adapters, with adapter source selection (pbase, hub, or s3) and token-streaming responses.
+Which operations an agent can call, which act, and which need a human in the loop.
 
-- **Human URL:** [https://docs.predibase.com/user-guide/inference/rest_api](https://docs.predibase.com/user-guide/inference/rest_api)
-- **Base URL:** `https://serving.app.predibase.com/{tenant}/deployments/v2/llms/{model}`
+- [Predibase Agentic Access](https://apis.io/agentic-access/predibase/predibase-agentic-access/)
 
-#### Tags
+#### Collections (8)
 
-- Prompt
-- Generate
-- Streaming
+Postman and Open Collection request collections.
 
-#### Properties
+- [Predibase API](https://apis.io/collections/predibase/open-predibase/)
+- [Predibase Adapters API](https://apis.io/collections/predibase/open-predibase-adapters-api/)
+- [Predibase Adapters Batch Inference API](https://apis.io/collections/predibase/open-predibase-batch-inference-api/)
+- [Predibase Adapters Datasets API](https://apis.io/collections/predibase/open-predibase-datasets-api/)
+- [Predibase Adapters Deployments API](https://apis.io/collections/predibase/open-predibase-deployments-api/)
+- [Predibase Adapters Fine-Tuning API](https://apis.io/collections/predibase/open-predibase-fine-tuning-api/)
+- [Predibase Adapters Inference API](https://apis.io/collections/predibase/open-predibase-inference-api/)
+- [Predibase Adapters Models API](https://apis.io/collections/predibase/open-predibase-models-api/)
 
-- [Documentation](https://docs.predibase.com/user-guide/inference/rest_api)
-- [API Reference](https://docs.predibase.com/user-guide/inference/querying-models/text-generation)
-- [OpenAPI](openapi/predibase-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/predibase.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/predibase.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+#### Governance rules (1)
 
-### Predibase Fine-Tuning API
+Spectral rulesets for the provider's contracts.
 
-Create and manage supervised and reinforcement (GRPO) fine-tuning jobs that train efficient LoRA / Turbo LoRA adapters on top of open-source base models, returning adapter versions for serving.
+- [Predibase — asyncapi rules](https://apis.io/rules/predibase/predibase-asyncapi-spectral-rules/)
 
-- **Human URL:** [https://docs.predibase.com/user-guide/fine-tuning/overview](https://docs.predibase.com/user-guide/fine-tuning/overview)
-- **Base URL:** `https://api.app.predibase.com/v2`
+#### Security (2)
 
-#### Tags
+Authentication, trust centre, and vulnerability disclosure.
 
-- Fine-Tuning
-- LoRA
-- GRPO
-- Reinforcement Learning
+- [Predibase Authentication](https://apis.io/security/predibase/predibase-authentication/)
+- [Predibase Domain Security](https://apis.io/security/predibase/predibase-domain-security/)
 
-#### Properties
+#### Plans and pricing (1)
 
-- [Documentation](https://docs.predibase.com/user-guide/fine-tuning/overview)
-- [Documentation](https://docs.predibase.com/user-guide/fine-tuning/grpo)
-- [OpenAPI](openapi/predibase-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/predibase.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/predibase.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+Published plans, tiers and prices.
 
-### Predibase Adapters API
+- [Predibase Plans Pricing](https://apis.io/plans/predibase/predibase-plans-pricing/)
 
-Manage adapter repositories and the trained adapter versions inside them - the LoRA artifacts produced by fine-tuning jobs that are loaded onto deployments for inference.
+#### Rate limits (1)
 
-- **Human URL:** [https://docs.predibase.com/fine-tuning/adapters](https://docs.predibase.com/fine-tuning/adapters)
-- **Base URL:** `https://api.app.predibase.com/v2`
+Published request limits.
 
-#### Tags
+- [Predibase Rate Limits](https://apis.io/rate-limits/predibase/predibase-rate-limits/)
 
-- Adapters
-- Repos
-- Versions
+#### FinOps (1)
 
-#### Properties
+What the API costs to run, by operation.
 
-- [Documentation](https://docs.predibase.com/fine-tuning/adapters)
-- [OpenAPI](openapi/predibase-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/predibase.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/predibase.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+- [Predibase Finops](https://apis.io/finops/predibase/predibase-finops/)
 
-### Predibase Deployments API
+## Where to find this API
 
-Create, read, update, and delete dedicated and private serverless deployments, selecting a base model and GPU accelerator (A10, A100) and enabling LoRA serving for fine-tuned adapters.
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
 
-- **Human URL:** [https://docs.predibase.com/user-guide/inference/dedicated_deployments](https://docs.predibase.com/user-guide/inference/dedicated_deployments)
-- **Base URL:** `https://api.app.predibase.com/v2`
-
-#### Tags
-
-- Deployments
-- Dedicated
-- Serverless
-
-#### Properties
-
-- [Documentation](https://docs.predibase.com/user-guide/inference/dedicated_deployments)
-- [Documentation](https://docs.predibase.com/user-guide/inference/private_deployments)
-- [OpenAPI](openapi/predibase-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/predibase.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/predibase.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-
-### Predibase Datasets API
-
-Connect and manage datasets used as input to fine-tuning jobs, uploaded from files or referenced from connected storage.
-
-- **Human URL:** [https://docs.predibase.com/user-guide/getting-started/fine-tuning-and-serving](https://docs.predibase.com/user-guide/getting-started/fine-tuning-and-serving)
-- **Base URL:** `https://api.app.predibase.com/v2`
-
-#### Tags
-
-- Datasets
-- Training Data
-
-#### Properties
-
-- [Documentation](https://docs.predibase.com/user-guide/getting-started/fine-tuning-and-serving)
-- [OpenAPI](openapi/predibase-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/predibase.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/predibase.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-
-### Predibase Models API
-
-List the open-source base models supported on Predibase for fine-tuning and serving, with metadata used when creating jobs and deployments.
-
-- **Human URL:** [https://docs.predibase.com/user-guide/inference/models](https://docs.predibase.com/user-guide/inference/models)
-- **Base URL:** `https://api.app.predibase.com/v2`
-
-#### Tags
-
-- Models
-- Catalog
-- Base Models
-
-#### Properties
-
-- [Documentation](https://docs.predibase.com/user-guide/inference/models)
-- [OpenAPI](openapi/predibase-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/predibase.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/predibase.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-
-### Predibase Batch Inference API
-
-Launch asynchronous batch inference jobs against a base model with per-row adapter selection, billed at a flat per-million-token batch rate for non-realtime workloads.
-
-- **Human URL:** [https://docs.predibase.com/user-guide/inference/BatchInference](https://docs.predibase.com/user-guide/inference/BatchInference)
-- **Base URL:** `https://api.app.predibase.com/v2`
-
-#### Tags
-
-- Batch
-- Async
-
-#### Properties
-
-- [Documentation](https://docs.predibase.com/user-guide/inference/BatchInference)
-- [OpenAPI](openapi/predibase-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/predibase.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/predibase.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-
-## Common Properties
-
-- [GitHub Organization](https://github.com/predibase)
-- [LinkedIn](https://www.linkedin.com/company/predibase)
 - [Website](https://predibase.com)
 - [Documentation](https://docs.predibase.com)
-- [Plans](plans/predibase-plans-pricing.yml)
-- [Rate Limits](rate-limits/predibase-rate-limits.yml)
-- [Fin Ops](finops/predibase-finops.yml)
+- [GitHub](https://github.com/predibase)
 
-## Maintainers
+## API Evangelist rating
 
-**FN:** Kin Lane
-**Email:** kin@apievangelist.com
+**Kin Score 27.9** — thin · rubric 0.24.0 · scored 2026-10-17
+
+| Facet | Score |
+|---|---|
+| Discoverability | 66.1 |
+| Contract quality | 49.3 |
+| Contract governance | 11.4 |
+| Operational transparency | 10.5 |
+| Developer ergonomics | 29.8 |
+| Access clarity | 7.9 |
+
+**Agent readiness 20.7** — agent-aware
+
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | yes |
+| Agentic Access | derived (partial credit) |
+| Reversibility Documented | documented (partial credit) |
+| MCP Server | — |
+| Auth Clarity | bearer (partial credit) |
+| Idempotency | — |
+| Error Semantics | — |
+| OpenAPI Examples | — |
+| Rate Limit Signal | derived (partial credit) |
+| Event Surface Described | derived (partial credit) |
+| Agent Skills | — |
+| Well Known Catalog | — |
+| Consent Identity | — |
+| Agent Card | — |
+| Dry Run Mode | — |
+| Delegated Identity | — |
+| Protected Resource Metadata | — |
+| Dynamic Client Registration | — |
+| Agentic Commerce | — |
+
+**Regulatory alignment 10.9** — Horizontal (data, software, accessibility, platform)
+
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/predibase/](https://apis.io/providers/predibase/).
+
+## How this profile is made
+
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
+
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for Predibase: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
+
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/predibase/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
